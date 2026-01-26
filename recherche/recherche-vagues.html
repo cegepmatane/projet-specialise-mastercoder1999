@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche Successive - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f5f7fa;
+            border-bottom: 2px solid #e1e8ed;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #657786;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: #e8f4f8;
+            color: #1da1f2;
+        }
+
+        .tab.active {
+            color: #1da1f2;
+            border-bottom-color: #1da1f2;
+            background: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #1da1f2;
+        }
+
+        .section h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #657786;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1da1f2;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .search-item,
+        .keyword-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-item input,
+        .keyword-item input {
+            flex: 1;
+        }
+
+        .action {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-primary {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .action-primary:hover {
+            background: #1a91da;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 161, 242, 0.4);
+        }
+
+        .action-secondary {
+            background: #657786;
+            color: white;
+        }
+
+        .action-secondary:hover {
+            background: #546778;
+        }
+
+        .action-danger {
+            background: #e0245e;
+            color: white;
+        }
+
+        .action-danger:hover {
+            background: #c91f53;
+        }
+
+        .action-success {
+            background: #17bf63;
+            color: white;
+            font-size: 16px;
+            padding: 15px 30px;
+        }
+
+        .action-success:hover {
+            background: #14a556;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(23, 191, 99, 0.4);
+        }
+
+        .keywords-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .keyword-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e1e8ed;
+        }
+
+        .keyword-card h4 {
+            color: #1e3c72;
+            margin-bottom: 8px;
+            font-size: 1em;
+        }
+
+        .keyword-card p {
+            color: #657786;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .keyword-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .type-tech { background: #e3f2fd; color: #1976d2; }
+        .type-tool { background: #f3e5f5; color: #7b1fa2; }
+        .type-example { background: #fff3e0; color: #f57c00; }
+        .type-community { background: #e8f5e9; color: #388e3c; }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            color: #0c5460;
+        }
+
+        .url-list {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .url-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            word-break: break-all;
+            font-size: 0.9em;
+            color: #1da1f2;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .tabs, .action, .actions {
+                display: none;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Recherche Successive</h1>
+            <p>Documentation de veille technologique</p>
+        </header>
+
+        <div class="tabs" id="tabsContainer">
+            <button class="tab active" onclick="switchTab(0)">Recherche Initiale</button>
+        </div>
+
+        <div id="contentContainer">
+            <div class="tab-content active" data-wave="0">
+                <div class="alert alert-info">
+                    <strong>💡 Conseil :</strong> Partage tes expressions de recherche et prends note des meilleures URLs. Ouvre ces pages et lis en diagonale pour repérer des mots-clés intéressants.
+                </div>
+
+                <div class="section">
+                    <h3>🔍 Expressions de recherche</h3>
+                    <div id="searches-0"></div>
+                    <button class="action action-primary" onclick="addSearch(0)">+ Ajouter une recherche</button>
+                </div>
+
+                <div class="section">
+                    <h3>🔗 URLs découvertes</h3>
+                    <div id="urls-0"></div>
+                    <button class="action action-primary" onclick="addUrl(0)">+ Ajouter une URL</button>
+                </div>
+
+                <div class="section">
+                    <h3>🏷️ Mots-clés identifiés</h3>
+                    <p style="color: #657786; margin-bottom: 15px;">Prends en note les meilleurs mots techniques et acronymes trouvés avec une petite explication minimale.</p>
+                    <div id="keywords-0"></div>
+                    <button class="action action-primary" onclick="addKeyword(0)">+ Ajouter un mot-clé</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 30px; background: #f5f7fa; border-top: 2px solid #e1e8ed;">
+            <div class="actions">
+                <button class="action action-secondary" onclick="addWave()">+ Nouvelle vague de recherche</button>
+                <button class="action action-success" onclick="exportPDF()">📄 Exporter en PDF</button>
+                <button class="action action-secondary" onclick="saveData()">💾 Sauvegarder</button>
+                <button class="action action-secondary" onclick="loadData()">📂 Charger</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let waveCount = 1;
+        let data = {
+            waves: [
+                { searches: [], urls: [], keywords: [] }
+            ]
+        };
+
+        function switchTab(index) {
+            let tabs = document.querySelectorAll('.tab');
+            let contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+
+            tabs[index].classList.add('active');
+            contents[index].classList.add('active');
+        }
+
+        function addSearch(waveIndex) {
+            let container = document.getElementById(`searches-${waveIndex}`);
+            let searchDiv = document.createElement('div');
+            searchDiv.className = 'search-item';
+            searchDiv.innerHTML = `
+                <input type="text" placeholder='Exemple: "3d engine js"' onchange="updateData()">
+                <button class="action action-danger" onclick="this.parentElement.remove(); updateData()">✕</button>
+            `;
+            container.appendChild(searchDiv);
+        }
+
+        function addUrl(waveIndex) {
+            let container = document.getElementById(`urls-${waveIndex}`);
+            let urlDiv = document.createElement('div');
+            urlDiv.className = 'search-item';
+            urlDiv.innerHTML = `
+                <input type="text" placeholder="https://example.com" onchange="updateData()">
+                <button class="action action-danger" onclick="this.parentElement.remove(); updateData()">✕</button>
+            `;
+            container.appendChild(urlDiv);
+        }
+
+        function addKeyword(waveIndex) {
+            let container = document.getElementById(`keywords-${waveIndex}`);
+            let keywordDiv = document.createElement('div');
+            keywordDiv.className = 'keyword-item';
+            keywordDiv.innerHTML = `
+                <input type="text" placeholder="Mot-clé (ex: Babylon.JS)" style="flex: 0.3;" onchange="updateData()">
+                <select style="flex: 0.2; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px;" onchange="updateData()">
+                    <option value="tech">Technologie</option>
+                    <option value="tool">Outil</option>
+                    <option value="example">Exemple</option>
+                    <option value="community">Communauté</option>
+                </select>
+                <input type="text" placeholder="Brève explication" style="flex: 0.4;" onchange="updateData()">
+                <button class="action action-danger" onclick="this.parentElement.remove(); updateData()">✕</button>
+            `;
+            container.appendChild(keywordDiv);
+        }
+
+        function addWave() {
+            waveCount++;
+            let waveIndex = waveCount - 1;
+
+            let tabsContainer = document.getElementById('tabsContainer');
+            let tab = document.createElement('button');
+            tab.className = 'tab';
+            tab.textContent = waveIndex === 0 ? 'Recherche Initiale' : `Vague ${waveIndex + 1}`;
+            tab.onclick = () => switchTab(waveIndex);
+            tabsContainer.appendChild(tab);
+
+            let contentContainer = document.getElementById('contentContainer');
+            let content = document.createElement('div');
+            content.className = 'tab-content';
+            content.setAttribute('data-wave', waveIndex);
+
+            // Générer la suggestion des mots-clés précédents
+            let previousKeywordsSuggestion = '';
+            if (waveIndex > 0) {
+                let currentData = collectData();
+                previousKeywordsSuggestion = getPreviousKeywordsSuggestion(currentData, waveIndex);
+            }
+
+            content.innerHTML = `
+                <div class="alert alert-info">
+                    <strong>🔄 Vague ${waveIndex + 1} :</strong> Approfondis ta recherche à partir des mots-clés identifiés dans la vague précédente.
+                </div>
+
+                ${previousKeywordsSuggestion}
+
+                <div class="section">
+                    <h3>🔍 Expressions de recherche</h3>
+                    <div id="searches-${waveIndex}"></div>
+                    <button class="action action-primary" onclick="addSearch(${waveIndex})">+ Ajouter une recherche</button>
+                </div>
+
+                <div class="section">
+                    <h3>🔗 URLs découvertes</h3>
+                    <div id="urls-${waveIndex}"></div>
+                    <button class="action action-primary" onclick="addUrl(${waveIndex})">+ Ajouter une URL</button>
+                </div>
+
+                <div class="section">
+                    <h3>🏷️ Mots-clés identifiés</h3>
+                    <div id="keywords-${waveIndex}"></div>
+                    <button class="action action-primary" onclick="addKeyword(${waveIndex})">+ Ajouter un mot-clé</button>
+                </div>
+            `;
+            contentContainer.appendChild(content);
+
+            data.waves.push({ searches: [], urls: [], keywords: [] });
+
+            switchTab(waveIndex);
+        }
+
+        function updateData() {
+            // Sauvegarde automatique locale
+            localStorage.setItem('rechercheSuccessive', JSON.stringify(collectData()));
+        }
+
+        function collectData() {
+            let collectedData = { waves: [] };
+
+            for (let i = 0; i < waveCount; i++) {
+                let wave = {
+                    searches: [],
+                    urls: [],
+                    keywords: []
+                };
+
+                let searchInputs = document.querySelectorAll(`#searches-${i} input`);
+                searchInputs.forEach(input => {
+                    if (input.value.trim()) wave.searches.push(input.value.trim());
+                });
+
+                let urlInputs = document.querySelectorAll(`#urls-${i} input`);
+                urlInputs.forEach(input => {
+                    if (input.value.trim()) wave.urls.push(input.value.trim());
+                });
+
+                let keywordItems = document.querySelectorAll(`#keywords-${i} .keyword-item`);
+                keywordItems.forEach(item => {
+                    let inputs = item.querySelectorAll('input');
+                    let select = item.querySelector('select');
+                    if (inputs[0].value.trim()) {
+                        wave.keywords.push({
+                            term: inputs[0].value.trim(),
+                            type: select.value,
+                            description: inputs[1].value.trim()
+                        });
+                    }
+                });
+
+                collectedData.waves.push(wave);
+            }
+
+            return collectedData;
+        }
+
+        function saveData() {
+            let data = collectData();
+            let dataStr = JSON.stringify(data, null, 2);
+            let dataBlob = new Blob([dataStr], { type: 'application/json' });
+            let url = URL.createObjectURL(dataBlob);
+            let link = document.createElement('a');
+            link.href = url;
+            link.download = 'recherche-vagues.json';
+            link.click();
+            alert('✅ Données sauvegardées !');
+        }
+
+        function loadData() {
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        let loadedData = JSON.parse(event.target.result);
+                        reconstructInterface(loadedData);
+                        alert('✅ Données chargées avec succès !');
+                    } catch (err) {
+                        alert('❌ Erreur lors du chargement du fichier');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function reconstructInterface(loadedData) {
+            document.getElementById('tabsContainer').innerHTML = '<button class="tab active" onclick="switchTab(0)">Recherche Initiale</button>';
+            document.getElementById('contentContainer').innerHTML = '';
+            waveCount = loadedData.waves.length;
+
+            loadedData.waves.forEach((wave, index) => {
+                if (index > 0) {
+                    // Ajouter l'onglet
+                    let tabsContainer = document.getElementById('tabsContainer');
+                    let tab = document.createElement('button');
+                    tab.className = 'tab';
+                    tab.textContent = `Vague ${index + 1}`;
+                    tab.onclick = () => switchTab(index);
+                    tabsContainer.appendChild(tab);
+                }
+
+                let contentContainer = document.getElementById('contentContainer');
+                let content = document.createElement('div');
+                content.className = index === 0 ? 'tab-content active' : 'tab-content';
+                content.setAttribute('data-wave', index);
+
+                let alertText = index === 0
+                    ? '<strong>💡 Conseil :</strong> Partage tes expressions de recherche et prends note des meilleures URLs. Ouvre ces pages et lis en diagonale pour repérer des mots-clés intéressants.'
+                    : `<strong>🔄 Vague ${index + 1} :</strong> Approfondis ta recherche à partir des mots-clés identifiés dans la vague précédente.`;
+
+                content.innerHTML = `
+                    <div class="alert alert-info">
+                        ${alertText}
+                    </div>
+                    ${index > 0 ? getPreviousKeywordsSuggestion(loadedData, index) : ''}
+                    <div class="section">
+                        <h3>🔍 Expressions de recherche</h3>
+                        <div id="searches-${index}"></div>
+                        <button class="action action-primary" onclick="addSearch(${index})">+ Ajouter une recherche</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>🔗 URLs découvertes</h3>
+                        <div id="urls-${index}"></div>
+                        <button class="action action-primary" onclick="addUrl(${index})">+ Ajouter une URL</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>🏷️ Mots-clés identifiés</h3>
+                        <div id="keywords-${index}"></div>
+                        <button class="action action-primary" onclick="addKeyword(${index})">+ Ajouter un mot-clé</button>
+                    </div>
+                `;
+                contentContainer.appendChild(content);
+
+                // Remplir les données
+                wave.searches.forEach(search => {
+                    let container = document.getElementById(`searches-${index}`);
+                    let searchDiv = document.createElement('div');
+                    searchDiv.className = 'search-item';
+                    searchDiv.innerHTML = `
+                        <input type="text" placeholder='Exemple: "3d engine js"' value="${search}" onchange="updateData()">
+                        <button class="action action-danger" onclick="this.parentElement.remove(); updateData()">✕</button>
+                    `;
+                    container.appendChild(searchDiv);
+                });
+
+                wave.urls.forEach(url => {
+                    let container = document.getElementById(`urls-${index}`);
+                    let urlDiv = document.createElement('div');
+                    urlDiv.className = 'search-item';
+                    urlDiv.innerHTML = `
+                        <input type="text" placeholder="https://example.com" value="${url}" onchange="updateData()">
+                        <button class="action action-danger" onclick="this.parentElement.remove(); updateData()">✕</button>
+                    `;
+                    container.appendChild(urlDiv);
+                });
+
+                wave.keywords.forEach(keyword => {
+                    let container = document.getElementById(`keywords-${index}`);
+                    let keywordDiv = document.createElement('div');
+                    keywordDiv.className = 'keyword-item';
+                    keywordDiv.innerHTML = `
+                        <input type="text" placeholder="Mot-clé" style="flex: 0.3;" value="${keyword.term}" onchange="updateData()">
+                        <select style="flex: 0.2; padding: 12px; border: 2px solid #e1e8ed; border-radius: 8px;" onchange="updateData()">
+                            <option value="tech" ${keyword.type === 'tech' ? 'selected' : ''}>Technologie</option>
+                            <option value="tool" ${keyword.type === 'tool' ? 'selected' : ''}>Outil</option>
+                            <option value="example" ${keyword.type === 'example' ? 'selected' : ''}>Exemple</option>
+                            <option value="community" ${keyword.type === 'community' ? 'selected' : ''}>Communauté</option>
+                        </select>
+                        <input type="text" placeholder="Brève explication" style="flex: 0.4;" value="${keyword.description}" onchange="updateData()">
+                        <button class="action action-danger" onclick="this.parentElement.remove(); updateData()">✕</button>
+                    `;
+                    container.appendChild(keywordDiv);
+                });
+            });
+
+            switchTab(0);
+        }
+
+        function getPreviousKeywordsSuggestion(data, currentIndex) {
+            if (currentIndex === 0) return '';
+
+            let previousWave = data.waves[currentIndex - 1];
+            if (!previousWave.keywords || previousWave.keywords.length === 0) return '';
+
+            let keywordsHtml = previousWave.keywords.map(kw => {
+                let typeClass = `type-${kw.type}`;
+                return `
+                    <div class="keyword-card">
+                        <span class="keyword-type ${typeClass}">${getTypeLabel(kw.type)}</span>
+                        <h4>${kw.term}</h4>
+                        <p>${kw.description}</p>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="section" style="border-left-color: #17bf63;">
+                    <h3>💡 Mots-clés de la vague précédente</h3>
+                    <p style="color: #657786; margin-bottom: 15px;">Utilise ces mots-clés pour approfondir ta recherche</p>
+                    <div class="keywords-grid">
+                        ${keywordsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getTypeLabel(type) {
+            const labels = {
+                'tech': 'Technologie',
+                'tool': 'Outil',
+                'example': 'Exemple',
+                'community': 'Communauté'
+            };
+            return labels[type] || type;
+        }
+
+        function exportPDF() {
+            window.print();
+        }
+
+        window.onload = () => {
+            let saved = localStorage.getItem('rechercheSuccessive');
+            if (saved) {
+                try {
+                    let loadedData = JSON.parse(saved);
+                    reconstructInterface(loadedData);
+                    console.log('✅ Données restaurées automatiquement');
+                } catch (err) {
+                    console.log('❌ Erreur lors du chargement automatique');
+                }
+            }
+        };
+    </script>
+</body>
+</html>

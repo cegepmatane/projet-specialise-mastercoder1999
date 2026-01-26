@@ -1,0 +1,54 @@
+{
+  "waves": [
+    {
+      "searches": [
+        "3d engine godot",
+        "database link godot",
+        "psx assets",
+        "godot c#",
+        "3d models",
+        "psx shaders"
+      ],
+      "urls": [
+        "https://godotengine.org/",
+        "https://docs.godotengine.org/en/stable/tutorials/3d/introduction_to_3d.html",
+        "https://en.wikipedia.org/wiki/Godot_(game_engine)",
+        "https://github.com/godotengine/godot",
+        "https://www.reddit.com/r/godot/comments/1bqva2w/connecting_a_database_to_godot4/",
+        "https://docs.godotengine.org/en/stable/tutorials/io/index.html",
+        "https://itch.io/game-assets/tag-psx",
+        "https://github.com/Miziziziz/Retro3DGraphicsCollection",
+        "https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/index.html",
+        "https://godotengine.org/asset-library/",
+        "https://godotshaders.com/shader/ps1-psx-model/"
+      ],
+      "keywords": [
+        {
+          "term": "godot",
+          "type": "tool",
+          "description": "Engin 3d pour la création de jeu"
+        },
+        {
+          "term": "psx",
+          "type": "community",
+          "description": "Style de la playstation 1 (retro)"
+        },
+        {
+          "term": "sqllite",
+          "type": "tech",
+          "description": "base de donnée locale"
+        },
+        {
+          "term": "mysql",
+          "type": "tech",
+          "description": "base de donnée externe"
+        },
+        {
+          "term": "c#",
+          "type": "tech",
+          "description": "language de programation disponible avec godot"
+        }
+      ]
+    }
+  ]
+}
