@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cwh6fms5uftbi"]
+
+[ext_resource type="Script" uid="uid://b8yoj8yyf5tap" path="res://MainMenuController.gd" id="1_5b7ti"]
+
+[node name="MainMenu" type="Control" unique_id=820363343]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5b7ti")
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=405659040]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.0
+offset_right = 145.0
+offset_bottom = 72.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="GridContainer" unique_id=238290965]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "Potion man"
+horizontal_alignment = 1
+
+[node name="PotionButton" type="Button" parent="GridContainer" unique_id=1828596648]
+layout_mode = 2
+text = "Potion Manager"
+
+[node name="PlantButton" type="Button" parent="GridContainer" unique_id=546953498]
+layout_mode = 2
+text = "Plant Manager"
+
+[connection signal="button_down" from="GridContainer/PotionButton" to="." method="_on_potion_button_button_down"]
+[connection signal="button_down" from="GridContainer/PlantButton" to="." method="_on_plant_button_button_down"]
