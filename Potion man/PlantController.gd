@@ -59,3 +59,25 @@ func _on_delete_data_button_down() -> void:
 
 func _on_custom_select_button_down() -> void:
 	pass # Replace with function body.
+
+
+func _on_store_image_button_down() -> void:
+	var image := preload("res://images/nirnroot.png")
+	var pba = image.get_image().save_jpg_to_buffer()
+	database.update_rows("plants", "name = 'Nirnroot'", {"image" : pba})
+	pass # Replace with function body.
+
+
+func _on_load_image_button_down() -> void:
+	database.select_rows("plants","name='Nirnroot'", ["*"])
+	for i in database.query_result:
+		var image = Image.new()
+		image.load_jpg_from_buffer(i.image)
+		var texture = ImageTexture.create_from_image(image)
+		$TextureRect.texture = texture
+	pass # Replace with function body.
+
+
+func _on_return_button_button_down() -> void:
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
+	pass # Replace with function body.

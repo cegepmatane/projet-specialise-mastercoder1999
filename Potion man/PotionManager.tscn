@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b11m2hmlbxgf7"]
+
+[ext_resource type="Script" uid="uid://bb33llnx72npe" path="res://PotionController.gd" id="1_wjjwy"]
+
+[node name="Control" type="Control" unique_id=109198656]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wjjwy")
+
+[node name="PotionDropdown" type="OptionButton" parent="." unique_id=1871672114]
+layout_mode = 0
+offset_left = 309.0
+offset_top = 68.0
+offset_right = 580.0
+offset_bottom = 88.0
+
+[node name="PlantList" type="VBoxContainer" parent="." unique_id=388017414]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 73.0
+offset_right = 851.0
+offset_bottom = 309.0
+
+[node name="ReturnButton" type="Button" parent="." unique_id=1161796447]
+layout_mode = 0
+offset_left = 526.0
+offset_top = 593.0
+offset_right = 657.0
+offset_bottom = 634.0
+text = "Return"
+
+[connection signal="button_down" from="ReturnButton" to="." method="_on_return_button_button_down"]

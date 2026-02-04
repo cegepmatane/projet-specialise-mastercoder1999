@@ -12,9 +12,10 @@ func _process(delta: float) -> void:
 
 
 func _on_potion_button_button_down() -> void:
-	
+	get_tree().change_scene_to_file("res://PotionManager.tscn")
 	pass # Replace with function body.
 
 
 func _on_plant_button_button_down() -> void:
+	get_tree().change_scene_to_file("res://PlantManager.tscn")
 	pass # Replace with function body.
