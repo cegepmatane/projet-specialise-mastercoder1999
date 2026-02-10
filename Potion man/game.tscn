@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dbyegs60a33dq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwb40"]
+
+[sub_resource type="Sky" id="Sky_80nbo"]
+sky_material = SubResource("ProceduralSkyMaterial_mwb40")
+
+[sub_resource type="Environment" id="Environment_e2o6t"]
+background_mode = 2
+sky = SubResource("Sky_80nbo")
+
+[node name="Game" type="Node3D" unique_id=1347205182]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=435736919]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2109171977]
+environment = SubResource("Environment_e2o6t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1798296731]

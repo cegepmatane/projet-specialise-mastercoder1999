@@ -35,5 +35,10 @@ text = "Potion Manager"
 layout_mode = 2
 text = "Plant Manager"
 
+[node name="GameButton" type="Button" parent="GridContainer" unique_id=1695523831]
+layout_mode = 2
+text = "Game"
+
 [connection signal="button_down" from="GridContainer/PotionButton" to="." method="_on_potion_button_button_down"]
 [connection signal="button_down" from="GridContainer/PlantButton" to="." method="_on_plant_button_button_down"]
+[connection signal="button_down" from="GridContainer/GameButton" to="." method="_on_game_button_button_down"]
