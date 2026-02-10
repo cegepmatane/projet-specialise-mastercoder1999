@@ -1,19 +1,50 @@
 [gd_scene format=3 uid="uid://dbyegs60a33dq"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mwb40"]
+[ext_resource type="Texture2D" uid="uid://yoxsx1uyt4bk" path="res://addons/FloorMaterials/Dirt/Dirt_01/Dirt_01_basecolor.png" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://c7vrsqejhsflh" path="res://player/player.tscn" id="2_7jktm"]
+[ext_resource type="PackedScene" path="res://Models/Plants/bush-01-staticbody.tscn" id="3_fc0e3"]
+[ext_resource type="PackedScene" path="res://Models/Plants/bush-02-staticbody.tscn" id="4_7jktm"]
+[ext_resource type="PackedScene" path="res://Models/Plants/hedge-01-staticbody.tscn" id="5_7jktm"]
 
-[sub_resource type="Sky" id="Sky_80nbo"]
-sky_material = SubResource("ProceduralSkyMaterial_mwb40")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Environment" id="Environment_e2o6t"]
+[sub_resource type="Sky" id="Sky_e2o6t"]
+sky_material = SubResource("ProceduralSkyMaterial_80nbo")
+
+[sub_resource type="Environment" id="Environment_feb5d"]
 background_mode = 2
-sky = SubResource("Sky_80nbo")
+sky = SubResource("Sky_e2o6t")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feb5d"]
+albedo_texture = ExtResource("1_e2o6t")
+uv1_triplanar = true
 
 [node name="Game" type="Node3D" unique_id=1347205182]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=435736919]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=50201380]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2109171977]
-environment = SubResource("Environment_e2o6t")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1392639367]
+environment = SubResource("Environment_feb5d")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1798296731]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=219962846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1162109)
+use_collision = true
+size = Vector3(100, 0.002, 100)
+material = SubResource("StandardMaterial3D_feb5d")
+
+[node name="Player" parent="." unique_id=1649806724 instance=ExtResource("2_7jktm")]
+
+[node name="Bush-01-StaticBody" parent="." unique_id=1699999890 instance=ExtResource("3_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.3828957)
+
+[node name="Bush-02-StaticBody" parent="." unique_id=1553610776 instance=ExtResource("4_7jktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0388155)
+
+[node name="Hedge-01-StaticBody" parent="." unique_id=1479920360 instance=ExtResource("5_7jktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.1452966)

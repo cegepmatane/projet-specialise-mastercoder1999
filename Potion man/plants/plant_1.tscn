@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bi634f8lu85i"]
+
+[ext_resource type="PackedScene" uid="uid://c8tlly1q0iexj" path="res://Models/Plants/bush-01-staticbody.tscn" id="1_bb0b6"]
+[ext_resource type="Script" uid="uid://dxe3yutf6yk05" path="res://plants/plant.gd" id="1_lcarw"]
+[ext_resource type="PackedScene" uid="uid://b36ab3snaeglp" path="res://interaction/interaction_area/interaction_area.tscn" id="2_lcarw"]
+
+[node name="Plant1" type="Node3D" unique_id=2089543925]
+script = ExtResource("1_lcarw")
+
+[node name="Bush-01-StaticBody" parent="." unique_id=566999285 instance=ExtResource("1_bb0b6")]
+
+[node name="InteractionArea" parent="." unique_id=57867564 instance=ExtResource("2_lcarw")]
+
+[node name="CollisionShape3D" parent="InteractionArea" index="0" unique_id=1113459089]
+transform = Transform3D(0.745, 0, 0, 0, 0.68, 0, 0, 0, 0.925, 0, 0.45, 0)
+
+[connection signal="focused" from="InteractionArea" to="." method="_on_interaction_area_focused"]
+[connection signal="interacted" from="InteractionArea" to="." method="_on_interaction_area_interacted"]
+[connection signal="unfocused" from="InteractionArea" to="." method="_on_interaction_area_unfocused"]
+
+[editable path="InteractionArea"]

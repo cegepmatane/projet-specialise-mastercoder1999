@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c8tlly1q0iexj"]
+
+[ext_resource type="PackedScene" path="res://addons/shapespark-low-poly-exterior-plants/meshes/bush-01-mesh.tscn" id="1"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.4, 0.6, 0.4)
+
+[node name="Bush-01-StaticBody" type="StaticBody3D" unique_id=566999285]
+
+[node name="Bush-01" parent="." unique_id=1060444570 instance=ExtResource("1")]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=687329573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("1")

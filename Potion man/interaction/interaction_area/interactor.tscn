@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://br86pq3atqm5u"]
+
+[ext_resource type="Script" uid="uid://cw3yswskf0dw1" path="res://interaction/interaction_area/interactor.gd" id="1_rpfat"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wya0x"]
+
+[node name="Interactor" type="Area3D" unique_id=1359697784]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_rpfat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2006950076]
+shape = SubResource("BoxShape3D_wya0x")
