@@ -3,14 +3,23 @@
 [ext_resource type="Script" uid="uid://bir174iy5545r" path="res://player/Player.gd" id="1_oul6g"]
 [ext_resource type="PackedScene" uid="uid://bbc7n8wcbsuc1" path="res://interact/InteractRay.tscn" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dokginj6tepf" path="res://player/hurt.png" id="3_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://kfe1kdu34n" path="res://interaction/interaction_area/player_interactor.tscn" id="3_qjkh3"]
+[ext_resource type="Script" uid="uid://s28frdfefv3h" path="res://player/ui.gd" id="3_yw30f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mwb40"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_80nbo"]
 points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4760704, 0.49888408, 0.16971254, 0.5591441, 0.46417162, 0.23105091, -0.8035912, 0.32045516, 0.40741014, 0.651043, -0.24352328, -0.4827893, 0.59484255, 0.082213186, -0.3628679, -0.68231165, 0.2896967, 0.46904355, -0.65452886, -0.06627126, -0.12744367, 0.8427015, -0.33810276, -0.39343542, -0.6839421, -0.24471663, 0.43825462, 0.62330925, 0.20084947, 0.0841477, 0.977454, 0.11479468, -0.06820232, -0.9764576, -0.12927033, 0.20054972, -0.56312895, -0.4514544, -0.18552664, 0.59545326, -0.4534751, -0.27336287, 0.59226835, 0.40775412, -0.0069364863, -0.47682306, 0.49966025, 0.37582088, -0.5886136, 0.31695515, 0.111579016, 0.5630594, -0.48117727, -0.41725034, 0.5278656, -0.27049688, -0.48454633, -0.59697217, -0.06650971, -0.27974695, 0.90856135, 0.05333608, -0.25019687, -0.8807117, 0.20531891, 0.263647, -0.90277094, -0.1273943, 0.29336792, 0.8715263, -0.15719566, 0.3734115, -0.5263189, -0.32824618, 0.4996626, 0.47664148, -0.0068885577, 0.053105574, 0.8750009, 0.32470253, -0.15454252, -0.5908538, 0.4658794, -0.09727988, -0.7823577, -0.39818847, -0.3876489, -0.49817133, 0.31564978, -0.30067965, -0.58799505, -0.38890144)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjkh3"]
+bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6k8r"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g1dw6"]
 bg_color = Color(0.13333334, 0.13333334, 0.13333334, 1)
+draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yw30f"]
 bg_color = Color(1, 0, 0, 1)
@@ -33,21 +42,93 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2416365, 0)
 
 [node name="InteractRay" parent="Head" unique_id=856754628 instance=ExtResource("2_rkbax")]
 
-[node name="HurtOverlay" type="TextureRect" parent="." unique_id=1950419998]
+[node name="PlayerInteractor" parent="Head" unique_id=1359697784 instance=ExtResource("3_qjkh3")]
+transform = Transform3D(1.005, 0, 0, 0, 2.395, 0, 0, 0, 3.83, 0, -0.872, -1.4)
+
+[node name="UI" type="Control" parent="." unique_id=263411332]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_yw30f")
+
+[node name="HurtOverlay" type="TextureRect" parent="UI" unique_id=1950419998]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 643.0
 texture = ExtResource("3_g1dw6")
 expand_mode = 1
 
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=860237346]
+[node name="HealthBarBG" type="ProgressBar" parent="UI" unique_id=1477991689]
+layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -50.0
+offset_top = 558.0
 offset_right = 500.0
+offset_bottom = 608.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_qjkh3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g6k8r")
+value = 100.0
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="UI" unique_id=860237346]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 558.0
+offset_right = 500.0
+offset_bottom = 608.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_g1dw6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yw30f")
 value = 100.0
 show_percentage = false
+
+[node name="GameOver" type="Panel" parent="UI" unique_id=104202268]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -149.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/GameOver" unique_id=1079278346]
+layout_mode = 0
+offset_left = 361.0
+offset_top = -3.0
+offset_right = 804.0
+offset_bottom = 129.0
+theme_override_font_sizes/font_size = 44
+text = "You died."
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="UI/GameOver" unique_id=1338306873]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 228.0
+offset_right = 556.0
+offset_bottom = 271.0
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="UI/GameOver" unique_id=1340603832]
+layout_mode = 0
+offset_left = 610.0
+offset_top = 228.0
+offset_right = 784.0
+offset_bottom = 271.0
+text = "Quit"
+
+[connection signal="button_down" from="UI/GameOver/RestartButton" to="UI" method="_on_restart_button_button_down"]
+[connection signal="button_down" from="UI/GameOver/QuitButton" to="UI" method="_on_quit_button_button_down"]
+
+[editable path="Head/PlayerInteractor"]

@@ -1,0 +1,36 @@
+extends Control
+
+@onready var hurt_overlay = $HurtOverlay
+@onready var health_bar = $HealthBar
+@onready var health_bar_bg = $HealthBarBG
+
+# Hurt
+var hurt_tween : Tween
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	health_bar.value = GameState.get_value("health")
+	health_bar_bg.value = health_bar.value
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+func take_damage(damage : float):
+	health_bar.value -= damage
+	GameState.set_value("health", health_bar.value)
+	hurt_overlay.modulate = Color.WHITE
+	if hurt_tween:
+		hurt_tween.kill()
+	hurt_tween = create_tween()
+	hurt_tween.parallel().tween_property(hurt_overlay, "modulate", Color.TRANSPARENT, 0.5)
+	hurt_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	hurt_tween.parallel().tween_property(health_bar_bg, "value", health_bar.value, 0.6)
+
+func _on_quit_button_button_down() -> void:
+	pass # Replace with function body.
+
+
+func _on_restart_button_button_down() -> void:
+	pass # Replace with function body.

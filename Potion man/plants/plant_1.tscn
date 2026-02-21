@@ -3,13 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://c8tlly1q0iexj" path="res://Models/Plants/bush-01-staticbody.tscn" id="1_bb0b6"]
 [ext_resource type="Script" uid="uid://dxe3yutf6yk05" path="res://plants/plant.gd" id="1_lcarw"]
 [ext_resource type="PackedScene" uid="uid://b36ab3snaeglp" path="res://interaction/interaction_area/interaction_area.tscn" id="2_lcarw"]
+[ext_resource type="Shader" uid="uid://oxnittnlsjos" path="res://Materials/BushShader.gdshader" id="3_80b3g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_80b3g"]
+render_priority = 0
+shader = ExtResource("3_80b3g")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_strength = 0.0
+shader_parameter/glow_width = 2.0
 
 [node name="Plant1" type="Node3D" unique_id=2089543925]
 script = ExtResource("1_lcarw")
 
 [node name="Bush-01-StaticBody" parent="." unique_id=566999285 instance=ExtResource("1_bb0b6")]
 
+[node name="Bush-01" parent="Bush-01-StaticBody" index="0" unique_id=1060444570]
+material_override = null
+material_overlay = SubResource("ShaderMaterial_80b3g")
+
 [node name="InteractionArea" parent="." unique_id=57867564 instance=ExtResource("2_lcarw")]
+collision_mask = 2
 
 [node name="CollisionShape3D" parent="InteractionArea" index="0" unique_id=1113459089]
 transform = Transform3D(0.745, 0, 0, 0, 0.68, 0, 0, 0, 0.925, 0, 0.45, 0)
@@ -18,4 +31,6 @@ transform = Transform3D(0.745, 0, 0, 0, 0.68, 0, 0, 0, 0.925, 0, 0.45, 0)
 [connection signal="interacted" from="InteractionArea" to="." method="_on_interaction_area_interacted"]
 [connection signal="unfocused" from="InteractionArea" to="." method="_on_interaction_area_unfocused"]
 
+[editable path="Bush-01-StaticBody"]
+[editable path="Bush-01-StaticBody/Bush-01"]
 [editable path="InteractionArea"]

@@ -2,8 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://yoxsx1uyt4bk" path="res://addons/FloorMaterials/Dirt/Dirt_01/Dirt_01_basecolor.png" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://c7vrsqejhsflh" path="res://player/player.tscn" id="2_7jktm"]
-[ext_resource type="PackedScene" path="res://Models/Plants/bush-01-staticbody.tscn" id="3_fc0e3"]
-[ext_resource type="PackedScene" path="res://Models/Plants/bush-02-staticbody.tscn" id="4_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bi634f8lu85i" path="res://plants/plant_1.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" path="res://Models/Plants/hedge-01-staticbody.tscn" id="5_7jktm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
@@ -40,11 +39,8 @@ material = SubResource("StandardMaterial3D_feb5d")
 
 [node name="Player" parent="." unique_id=1649806724 instance=ExtResource("2_7jktm")]
 
-[node name="Bush-01-StaticBody" parent="." unique_id=1699999890 instance=ExtResource("3_fc0e3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.3828957)
-
-[node name="Bush-02-StaticBody" parent="." unique_id=1553610776 instance=ExtResource("4_7jktm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.0388155)
-
 [node name="Hedge-01-StaticBody" parent="." unique_id=1479920360 instance=ExtResource("5_7jktm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.1452966)
+
+[node name="Plant1" parent="." unique_id=2089543925 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7990522, 0, 0)

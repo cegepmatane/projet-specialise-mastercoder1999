@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name Player
 
 var speed
 const WALK_SPEED = 5.0
@@ -16,15 +17,15 @@ var t_bob = 0.0
 const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
+# Death flag
+var moving : bool = true
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var hurt_overlay = $HurtOverlay
-@onready var health_bar = $HealthBar
 
-# Hurt
-var hurt_tween : Tween
-
+@onready var ui = $UI
 func _ready():
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
@@ -39,7 +40,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	if Input.is_action_pressed("hurt"):
-		take_damage()
+		take_damage(1)
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -84,10 +85,10 @@ func _headbob(time) -> Vector3:
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
 	
-func take_damage():
-	hurt_overlay.modulate = Color.WHITE
-	if hurt_tween:
-		hurt_tween.kill()
-	hurt_tween = create_tween()
-	hurt_tween.tween_property(hurt_overlay, "modulate", Color.TRANSPARENT, 0.5)
-	
+func take_damage(damage : float):
+	ui.take_damage(damage)
+	if ui.health_bar.value <= 0:
+		die()
+func die():
+	moving = false
+	ui.show_gameover()
