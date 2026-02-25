@@ -86,9 +86,11 @@ func _headbob(time) -> Vector3:
 	return pos
 	
 func take_damage(damage : float):
+	print("The man is taking damage")
 	ui.take_damage(damage)
 	if ui.health_bar.value <= 0:
 		die()
 func die():
+	print("The man is fucking dead")
 	moving = false
 	ui.show_gameover()

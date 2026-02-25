@@ -3,6 +3,7 @@ extends Control
 @onready var hurt_overlay = $HurtOverlay
 @onready var health_bar = $HealthBar
 @onready var health_bar_bg = $HealthBarBG
+@onready var game_over = $GameOver
 
 # Hurt
 var hurt_tween : Tween
@@ -20,6 +21,7 @@ func _process(delta: float) -> void:
 func take_damage(damage : float):
 	health_bar.value -= damage
 	GameState.set_value("health", health_bar.value)
+	
 	hurt_overlay.modulate = Color.WHITE
 	if hurt_tween:
 		hurt_tween.kill()
@@ -28,9 +30,15 @@ func take_damage(damage : float):
 	hurt_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	hurt_tween.parallel().tween_property(health_bar_bg, "value", health_bar.value, 0.6)
 
-func _on_quit_button_button_down() -> void:
-	pass # Replace with function body.
+func show_gameover():
+	game_over.show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
-func _on_restart_button_button_down() -> void:
-	pass # Replace with function body.
+func _on_restart_button_pressed():
+	GameState.set_value("health", 100)
+	get_tree().reload_current_scene()
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c7vrsqejhsflh" path="res://player/player.tscn" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bi634f8lu85i" path="res://plants/plant_1.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" path="res://Models/Plants/hedge-01-staticbody.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" path="res://Models/Trees/tree-01-1-staticbody.tscn" id="5_ryrav"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,6 +24,9 @@ albedo_texture = ExtResource("1_e2o6t")
 uv1_triplanar = true
 
 [node name="Game" type="Node3D" unique_id=1347205182]
+
+[node name="Hedge-01-StaticBody2" parent="." unique_id=1821699052 instance=ExtResource("5_7jktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4008069, 1.0446105, 7.848488)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=50201380]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -44,3 +48,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.1452966)
 
 [node name="Plant1" parent="." unique_id=2089543925 instance=ExtResource("4_fc0e3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7990522, 0, 0)
+
+[node name="Plant2" parent="." unique_id=1660684694 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5170202, 0, 13.617698)
+
+[node name="Plant3" parent="." unique_id=443007098 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.849962, 0, 0)
+
+[node name="Plant4" parent="." unique_id=1599645399 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0581713, 0, 15.018728)
+
+[node name="Plant5" parent="." unique_id=757458282 instance=ExtResource("4_fc0e3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5127363, 0, 0.17314148)
+
+[node name="Hedge-01-StaticBody3" parent="." unique_id=583300396 instance=ExtResource("5_7jktm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8118014, 10.847851)
+
+[node name="Tree-01-1-StaticBody" parent="." unique_id=1005746235 instance=ExtResource("5_ryrav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.397245)
