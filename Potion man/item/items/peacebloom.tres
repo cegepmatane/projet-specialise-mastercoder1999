@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://megkkrcvom4a"]
+
+[ext_resource type="Script" uid="uid://3thy6f3h5468" path="res://item/item_data.gd" id="1_u6xre"]
+[ext_resource type="Texture2D" uid="uid://prebbffi8g5w" path="res://item/#1 - Transparent Icons.png" id="2_8dlrv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0vpt"]
+atlas = ExtResource("2_8dlrv")
+region = Rect2(448, 352, 32, 32)
+
+[resource]
+script = ExtResource("1_u6xre")
+name = "Peacebloom"
+description = "A basic plant used for brewing potions of restoration"
+stackable = true
+texture = SubResource("AtlasTexture_f0vpt")
+metadata/_custom_type_script = "uid://3thy6f3h5468"

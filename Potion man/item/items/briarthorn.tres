@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://darah7ilxk3a8"]
+
+[ext_resource type="Script" uid="uid://3thy6f3h5468" path="res://item/item_data.gd" id="1_8rx57"]
+[ext_resource type="Texture2D" uid="uid://prebbffi8g5w" path="res://item/#1 - Transparent Icons.png" id="2_fkacd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0vpt"]
+atlas = ExtResource("2_fkacd")
+region = Rect2(480, 352, 32, 32)
+
+[resource]
+script = ExtResource("1_8rx57")
+name = "Briarthorn"
+description = "A plant known for it's spriritual restoration properties"
+stackable = true
+texture = SubResource("AtlasTexture_f0vpt")
+metadata/_custom_type_script = "uid://3thy6f3h5468"
