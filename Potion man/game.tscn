@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://dbyegs60a33dq"]
 
 [ext_resource type="Texture2D" uid="uid://yoxsx1uyt4bk" path="res://addons/FloorMaterials/Dirt/Dirt_01/Dirt_01_basecolor.png" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://b6a6rak2xg71x" path="res://game.gd" id="1_eow3j"]
 [ext_resource type="PackedScene" uid="uid://c7vrsqejhsflh" path="res://player/player.tscn" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bi634f8lu85i" path="res://plants/plant_1.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" path="res://Models/Plants/hedge-01-staticbody.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" path="res://Models/Trees/tree-01-1-staticbody.tscn" id="5_ryrav"]
+[ext_resource type="Resource" uid="uid://cl3c15occ0m6t" path="res://inventory_data.tres" id="5_vef74"]
 [ext_resource type="PackedScene" uid="uid://bpca6anhwqg3u" path="res://inventory/inventory.tscn" id="6_ryrav"]
+[ext_resource type="Script" uid="uid://dt2b01jkijfh0" path="res://inventory/inventory_interface.gd" id="7_j5wjh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,6 +28,7 @@ albedo_texture = ExtResource("1_e2o6t")
 uv1_triplanar = true
 
 [node name="Game" type="Node3D" unique_id=1347205182]
+script = ExtResource("1_eow3j")
 
 [node name="Hedge-01-StaticBody2" parent="." unique_id=1821699052 instance=ExtResource("5_7jktm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4008069, 1.0446105, 7.848488)
@@ -43,6 +47,7 @@ size = Vector3(100, 0.002, 100)
 material = SubResource("StandardMaterial3D_feb5d")
 
 [node name="Player" parent="." unique_id=1649806724 instance=ExtResource("2_7jktm")]
+inventory_data = ExtResource("5_vef74")
 
 [node name="Hedge-01-StaticBody" parent="." unique_id=1479920360 instance=ExtResource("5_7jktm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.1452966)
@@ -77,6 +82,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("7_j5wjh")
 
 [node name="PlayerInventory" parent="UI/InventoryInterface" unique_id=1797189693 instance=ExtResource("6_ryrav")]
 layout_mode = 0
