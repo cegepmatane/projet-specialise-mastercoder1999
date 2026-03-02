@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://dif3wf8v6kobo"]
 
-[ext_resource type="Texture2D" uid="uid://ccljdvr6b6ww7" path="res://icon.svg" id="1_u4i3g"]
+[ext_resource type="Script" uid="uid://ceokjrw00sc2e" path="res://inventory/slot.gd" id="1_u4i3g"]
 
 [node name="Slot" type="PanelContainer" unique_id=287981509]
 custom_minimum_size = Vector2(64, 64)
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_u4i3g")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2071911088]
 layout_mode = 2
@@ -16,11 +17,11 @@ theme_override_constants/margin_bottom = 6
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=1116815295]
 layout_mode = 2
-texture = ExtResource("1_u4i3g")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="QuantityLabel" type="Label" parent="." unique_id=1713394295]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

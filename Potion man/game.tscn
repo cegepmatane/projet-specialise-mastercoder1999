@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bi634f8lu85i" path="res://plants/plant_1.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" path="res://Models/Plants/hedge-01-staticbody.tscn" id="5_7jktm"]
 [ext_resource type="PackedScene" path="res://Models/Trees/tree-01-1-staticbody.tscn" id="5_ryrav"]
+[ext_resource type="PackedScene" uid="uid://bpca6anhwqg3u" path="res://inventory/inventory.tscn" id="6_ryrav"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -66,3 +67,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8118014, 10.847851)
 
 [node name="Tree-01-1-StaticBody" parent="." unique_id=1005746235 instance=ExtResource("5_ryrav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.397245)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=134637995]
+
+[node name="InventoryInterface" type="Control" parent="UI" unique_id=984666387]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" unique_id=1797189693 instance=ExtResource("6_ryrav")]
+layout_mode = 0

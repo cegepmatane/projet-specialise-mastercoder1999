@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://bpca6anhwqg3u"]
 
+[ext_resource type="Script" uid="uid://bu52lixcad50n" path="res://inventory/inventory.gd" id="1_62wf1"]
+
 [node name="Inventory" type="PanelContainer" unique_id=1797189693]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_62wf1")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=2146434596]
 layout_mode = 2
