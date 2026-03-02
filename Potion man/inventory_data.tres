@@ -21,6 +21,7 @@ metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
 [sub_resource type="Resource" id="Resource_kvww2"]
 script = ExtResource("2_ebm5b")
 item_data = ExtResource("5_4plmx")
+quantity = 18
 metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
 
 [resource]
