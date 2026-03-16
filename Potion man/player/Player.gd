@@ -24,12 +24,18 @@ const FOV_CHANGE = 1.5
 # Death flag
 var moving : bool = true
 
+# Health
+var health: int = 5
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
+
+
 
 @onready var ui = $UI
 func _ready():
-
+	PlayerManager.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
@@ -39,6 +45,8 @@ func _unhandled_input(event):
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40),deg_to_rad(60))
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
+	if Input.is_action_just_pressed("interact"):
+		interact()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -96,6 +104,16 @@ func take_damage(damage : float):
 	if ui.health_bar.value <= 0:
 		die()
 func die():
-	print("The man is fucking dead")
+	print("The man is dead")
 	moving = false
 	ui.show_gameover()
+func interact():
+	if interact_ray.is_colliding():
+		interact_ray.get_collider().player_interact()
+		
+func get_drop_position() -> Vector3:
+	var direction = -camera.global_transform.basis.z
+	return camera.global_position + direction
+	
+func heal(heal_value: int) -> void:
+	health += heal_value

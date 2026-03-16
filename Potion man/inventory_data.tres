@@ -2,9 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bcte64kam2wy2" path="res://inventory/inventory_data.gd" id="1_aiod6"]
 [ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="2_ebm5b"]
+[ext_resource type="Resource" uid="uid://cl1mwm6gjbe6s" path="res://item/items/health_potion.tres" id="3_4plmx"]
 [ext_resource type="Resource" uid="uid://c88s24vxv786m" path="res://item/items/silverleaf.tres" id="3_ebm5b"]
 [ext_resource type="Resource" uid="uid://megkkrcvom4a" path="res://item/items/peacebloom.tres" id="4_e6xx3"]
 [ext_resource type="Resource" uid="uid://darah7ilxk3a8" path="res://item/items/briarthorn.tres" id="5_4plmx"]
+
+[sub_resource type="Resource" id="Resource_3nxsm"]
+script = ExtResource("2_ebm5b")
+item_data = ExtResource("3_4plmx")
+quantity = 4
+metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
 
 [sub_resource type="Resource" id="Resource_s3k8a"]
 script = ExtResource("2_ebm5b")
@@ -32,5 +39,5 @@ metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
 
 [resource]
 script = ExtResource("1_aiod6")
-slot_datas = Array[ExtResource("2_ebm5b")]([null, SubResource("Resource_s3k8a"), SubResource("Resource_e6xx3"), SubResource("Resource_7panb"), null, SubResource("Resource_kvww2"), null, null, null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("2_ebm5b")]([SubResource("Resource_3nxsm"), SubResource("Resource_s3k8a"), SubResource("Resource_e6xx3"), SubResource("Resource_7panb"), null, SubResource("Resource_kvww2"), null, null, null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://bcte64kam2wy2"

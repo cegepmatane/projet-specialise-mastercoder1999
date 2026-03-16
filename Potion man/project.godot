@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 GameState="*uid://bvt6d4vnfgrmd"
 HUD="*uid://d3fc445cnxj4m"
+PlayerManager="*uid://c704aa8migpn7"
+
+[global_group]
+
+external_inventory=""
 
 [input]
 

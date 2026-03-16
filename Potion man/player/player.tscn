@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://c7vrsqejhsflh"]
 
 [ext_resource type="Script" uid="uid://bir174iy5545r" path="res://player/Player.gd" id="1_oul6g"]
-[ext_resource type="PackedScene" uid="uid://bbc7n8wcbsuc1" path="res://interact/InteractRay.tscn" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dokginj6tepf" path="res://player/hurt.png" id="3_g1dw6"]
-[ext_resource type="PackedScene" uid="uid://kfe1kdu34n" path="res://interaction/interaction_area/player_interactor.tscn" id="3_qjkh3"]
 [ext_resource type="Script" uid="uid://s28frdfefv3h" path="res://player/ui.gd" id="3_yw30f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mwb40"]
@@ -25,6 +23,7 @@ draw_center = false
 bg_color = Color(1, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" unique_id=1649806724]
+collision_layer = 2
 script = ExtResource("1_oul6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1411061998]
@@ -40,10 +39,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2416365, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=566017726]
 
-[node name="InteractRay" parent="Head" unique_id=856754628 instance=ExtResource("2_rkbax")]
-
-[node name="PlayerInteractor" parent="Head" unique_id=1359697784 instance=ExtResource("3_qjkh3")]
-transform = Transform3D(1.005, 0, 0, 0, 2.395, 0, 0, 0, 3.83, 0, -0.872, -1.4)
+[node name="InteractRay" type="RayCast3D" parent="Head/Camera3D" unique_id=18319657]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 4
 
 [node name="UI" type="Control" parent="." unique_id=263411332]
 visible = false
@@ -128,7 +126,19 @@ offset_right = 784.0
 offset_bottom = 271.0
 text = "Quit"
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=846730637]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="button_down" from="UI/GameOver/RestartButton" to="UI" method="_on_restart_button_button_down"]
 [connection signal="button_down" from="UI/GameOver/QuitButton" to="UI" method="_on_quit_button_button_down"]
-
-[editable path="Head/PlayerInteractor"]

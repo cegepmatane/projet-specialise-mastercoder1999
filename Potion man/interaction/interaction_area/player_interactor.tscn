@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://kfe1kdu34n"]
-
-[ext_resource type="PackedScene" uid="uid://br86pq3atqm5u" path="res://interaction/interaction_area/interactor.tscn" id="1_b70cl"]
-[ext_resource type="Script" uid="uid://8jkrml7e5e3o" path="res://interaction/interaction_area/player_interactor.gd" id="2_1yfiu"]
-
-[node name="PlayerInteractor" unique_id=1359697784 instance=ExtResource("1_b70cl")]
-transform = Transform3D(5.185, 0, 0, 0, 5.185, 0, 0, 0, 5.185, 0, 0, 0)
-collision_layer = 2
-script = ExtResource("2_1yfiu")
