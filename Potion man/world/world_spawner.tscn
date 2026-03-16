@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c4g26xc0ylqtu"]
+
+[ext_resource type="Script" uid="uid://d2wnrh4i4urqe" path="res://world/world_spawner.gd" id="1_qd3tn"]
+
+[node name="WorldSpawner" type="Node3D" unique_id=1566735406]
+script = ExtResource("1_qd3tn")
+
+[node name="VegetationContainer" type="Node3D" parent="." unique_id=1984784582]
+
+[node name="HerbContainer" type="Node3D" parent="." unique_id=212211220]

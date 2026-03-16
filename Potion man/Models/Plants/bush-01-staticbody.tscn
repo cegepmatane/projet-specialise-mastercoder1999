@@ -10,14 +10,7 @@ shader_parameter/glow_color = Color(0.6, 1, 0.6, 1)
 shader_parameter/glow_strength = 0.0
 shader_parameter/glow_width = 2.0
 
-[sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.4, 0.6, 0.4)
-
 [node name="Bush-01-StaticBody" type="StaticBody3D" unique_id=566999285]
 
 [node name="Bush-01" parent="." unique_id=1060444570 instance=ExtResource("1")]
 material_override = SubResource("ShaderMaterial_47bsv")
-
-[node name="CollisionShape" type="CollisionShape3D" parent="." unique_id=687329573]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-shape = SubResource("1")

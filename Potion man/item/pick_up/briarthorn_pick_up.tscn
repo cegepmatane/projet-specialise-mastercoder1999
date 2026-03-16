@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cogrxlk1bahps"]
+
+[ext_resource type="Script" uid="uid://bpxlvkviycooj" path="res://item/pick_up/pick_up.gd" id="1_6f8wn"]
+[ext_resource type="Resource" uid="uid://darah7ilxk3a8" path="res://item/items/briarthorn.tres" id="2_6f8wn"]
+[ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="3_hda0l"]
+[ext_resource type="Texture2D" uid="uid://bu6uvhp6yxyho" path="res://item/item_atlas.tres" id="4_gh3w1"]
+[ext_resource type="PackedScene" uid="uid://c8tlly1q0iexj" path="res://Models/Plants/bush-01-staticbody.tscn" id="5_aj5i7"]
+[ext_resource type="Shader" uid="uid://oxnittnlsjos" path="res://Materials/BushShader.gdshader" id="6_le0ai"]
+
+[sub_resource type="Resource" id="Resource_7jl6c"]
+script = ExtResource("3_hda0l")
+item_data = ExtResource("2_6f8wn")
+metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fmha2"]
+radius = 0.35812593
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6f8wn"]
+radius = 0.35812593
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5p7ko"]
+render_priority = 0
+shader = ExtResource("6_le0ai")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_strength = 0.0
+shader_parameter/glow_width = 2.0
+
+[node name="PickUp" type="RigidBody3D" unique_id=1708170278]
+collision_layer = 0
+lock_rotation = true
+script = ExtResource("1_6f8wn")
+slot_data = SubResource("Resource_7jl6c")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1242399275]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("4_gh3w1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2058728234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07257676, 0)
+shape = SubResource("SphereShape3D_fmha2")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1143875848]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=882898839]
+shape = SubResource("SphereShape3D_6f8wn")
+
+[node name="Bush-01-StaticBody" parent="." unique_id=566999285 instance=ExtResource("5_aj5i7")]
+
+[node name="Bush-01" parent="Bush-01-StaticBody" index="0" unique_id=1060444570]
+material_override = null
+material_overlay = SubResource("ShaderMaterial_5p7ko")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="Bush-01-StaticBody"]
