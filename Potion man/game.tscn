@@ -14,10 +14,11 @@
 [ext_resource type="PackedScene" uid="uid://bmsbt8i1s4uqa" path="res://Models/brewer/BrewingStation.tscn" id="11_mfdv2"]
 [ext_resource type="Script" uid="uid://bcte64kam2wy2" path="res://inventory/inventory_data.gd" id="12_215e1"]
 [ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="13_7sc4i"]
-[ext_resource type="Resource" uid="uid://darah7ilxk3a8" path="res://item/items/briarthorn.tres" id="14_80cx4"]
 [ext_resource type="PackedScene" uid="uid://bds6wuswjurvs" path="res://item/pick_up/pick_up.tscn" id="15_7sc4i"]
 [ext_resource type="Resource" uid="uid://megkkrcvom4a" path="res://item/items/peacebloom.tres" id="16_80cx4"]
 [ext_resource type="PackedScene" uid="uid://bntohfcls7klt" path="res://Models/chest.tscn" id="16_e8heu"]
+[ext_resource type="Script" uid="uid://3thy6f3h5468" path="res://item/item_data.gd" id="17_boyg6"]
+[ext_resource type="Resource" uid="uid://cl1mwm6gjbe6s" path="res://item/items/health_potion.tres" id="18_e36ub"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_80nbo"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -41,14 +42,19 @@ script = ExtResource("13_7sc4i")
 item_data = ExtResource("16_80cx4")
 metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
 
+[sub_resource type="Resource" id="Resource_e8heu"]
+script = ExtResource("12_215e1")
+slot_datas = Array[ExtResource("13_7sc4i")]([null, null, null])
+metadata/_custom_type_script = "uid://bcte64kam2wy2"
+
 [sub_resource type="Resource" id="Resource_boyg6"]
 script = ExtResource("13_7sc4i")
-item_data = ExtResource("14_80cx4")
+item_data = ExtResource("16_80cx4")
 metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
 
 [sub_resource type="Resource" id="Resource_e36ub"]
 script = ExtResource("12_215e1")
-slot_datas = Array[ExtResource("13_7sc4i")]([SubResource("Resource_boyg6"), null, null, null, null])
+slot_datas = Array[ExtResource("13_7sc4i")]([SubResource("Resource_boyg6"), null, null, null, null, null])
 metadata/_custom_type_script = "uid://bcte64kam2wy2"
 
 [node name="Game" type="Node3D" unique_id=1347205182]
@@ -132,6 +138,22 @@ layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 
+[node name="BrewButton" type="Button" parent="UI/InventoryInterface" unique_id=328660201]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -17.5
+offset_right = 54.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Brew"
+
 [node name="HotBarInventory" parent="UI" unique_id=988919348 instance=ExtResource("11_e8heu")]
 offset_left = 10.0
 offset_top = 10.0
@@ -142,8 +164,10 @@ offset_bottom = 82.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3758366, -4.8355103)
 slot_data = SubResource("Resource_rvswv")
 
-[node name="BrewingStation" parent="." unique_id=1951705440 instance=ExtResource("11_mfdv2")]
+[node name="BrewingStation" parent="." unique_id=1951705440 groups=["brewing_station"] instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5136137, 0, 0)
+inventory_data = SubResource("Resource_e8heu")
+potion_results = Array[ExtResource("17_boyg6")]([ExtResource("18_e36ub")])
 
 [node name="Chest" parent="." unique_id=141034625 instance=ExtResource("16_e8heu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1372948, 0, -5.444734)
@@ -152,3 +176,4 @@ inventory_data = SubResource("Resource_e36ub")
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
 [connection signal="visibility_changed" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_visibility_changed"]
+[connection signal="pressed" from="UI/InventoryInterface/BrewButton" to="UI/InventoryInterface" method="_on_brew_button_pressed"]

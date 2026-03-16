@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bntohfcls7klt"]
 
-[ext_resource type="Script" uid="uid://blnnvygibr322" path="res://Models/brewer/BrewingStation.gd" id="1_oeuo0"]
+[ext_resource type="Script" uid="uid://c8idohfx8r00b" path="res://Models/chest.gd" id="1_oeuo0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm0si"]
 albedo_color = Color(0, 3.7045925, 0, 1)

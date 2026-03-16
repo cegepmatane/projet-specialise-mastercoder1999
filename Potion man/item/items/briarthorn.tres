@@ -13,4 +13,5 @@ name = "Briarthorn"
 description = "A plant known for it's spriritual restoration properties"
 stackable = true
 texture = SubResource("AtlasTexture_f0vpt")
+plant_id = 3
 metadata/_custom_type_script = "uid://3thy6f3h5468"

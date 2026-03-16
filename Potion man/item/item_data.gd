@@ -6,5 +6,8 @@ class_name ItemData
 @export var stackable: bool = false
 @export var texture: AtlasTexture
 
+@export var plant_id: int = -1
+@export var potion_id: int = -1
+
 func use(target) -> void:
 	pass

@@ -20,10 +20,12 @@ config/icon="res://icon.svg"
 GameState="*uid://bvt6d4vnfgrmd"
 HUD="*uid://d3fc445cnxj4m"
 PlayerManager="*uid://c704aa8migpn7"
+RecipeManager="*uid://myeyy72luaqd"
 
 [global_group]
 
 external_inventory=""
+brewing_station=""
 
 [input]
 

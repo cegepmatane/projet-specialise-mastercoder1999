@@ -10,7 +10,7 @@ var external_inventory_owner
 @onready var player_inventory: PanelContainer = $PlayerInventory
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 @onready var external_inventory: PanelContainer = $ExternalInventory
-
+@onready var brew_button: Button = $BrewButton
 
 func _physics_process(delta: float) -> void:
 	if grabbed_slot.visible:
@@ -30,6 +30,10 @@ func set_external_inventory(_external_inventory_owner) -> void:
 	inventory_data.inventory_interact.connect(on_inventory_interact)
 	external_inventory.set_inventory_data(inventory_data)
 	external_inventory.show()
+	if external_inventory_owner.is_in_group("brewing_station"):
+		brew_button.show()
+	else:
+		brew_button.hide()
 
 func clear_external_inventory() -> void:
 	if external_inventory_owner:
@@ -37,10 +41,23 @@ func clear_external_inventory() -> void:
 		inventory_data.inventory_interact.disconnect(on_inventory_interact)
 		external_inventory.clear_inventory_data(inventory_data)
 		external_inventory.hide()
+		brew_button.hide()
 		external_inventory_owner = null
 
 
-func on_inventory_interact(inventory_data: InventoryData, index: int, button: int) ->void:
+func on_inventory_interact(inventory_data: InventoryData, index: int, button: int) -> void:
+	var is_brewing_output_slot := false
+	
+	if external_inventory_owner \
+			and external_inventory_owner.is_in_group("brewing_station") \
+			and inventory_data == external_inventory_owner.inventory_data \
+			and index == 2:
+		is_brewing_output_slot = true
+	
+	if is_brewing_output_slot and grabbed_slot_data != null:
+		print("UI: brewer output slot is locked")
+		return
+	
 	match [grabbed_slot_data, button]:
 		[null, MOUSE_BUTTON_LEFT]:
 			grabbed_slot_data = inventory_data.grab_slot_data(index)
@@ -50,8 +67,9 @@ func on_inventory_interact(inventory_data: InventoryData, index: int, button: in
 			inventory_data.use_slot_data(index)
 		[_, MOUSE_BUTTON_RIGHT]:
 			grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
+	
 	update_grabbed_slot()
-
+	
 func update_grabbed_slot() -> void:
 	if grabbed_slot_data:
 		grabbed_slot.show()
@@ -81,3 +99,20 @@ func _on_visibility_changed() -> void:
 		drop_slot_data.emit(grabbed_slot_data)
 		grabbed_slot_data = null
 		update_grabbed_slot()
+
+
+func _on_brew_button_pressed() -> void:
+	if external_inventory_owner == null:
+		print("UI: no external inventory owner")
+		return
+	
+	if not external_inventory_owner.is_in_group("brewing_station"):
+		print("UI: external inventory owner is not a brewing station")
+		return
+	
+	if not external_inventory_owner.has_method("brew"):
+		print("UI: brewing station has no brew() method")
+		return
+	
+	print("UI: brew button pressed")
+	external_inventory_owner.brew()
