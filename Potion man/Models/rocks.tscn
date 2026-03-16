@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://vaj1jl36p676"]
+
+[ext_resource type="PackedScene" uid="uid://cvwre2f7wb3ga" path="res://addons/Rocks/rocks.fbx" id="1_u3yji"]
+
+[node name="rocks" unique_id=955698399 instance=ExtResource("1_u3yji")]
+
+[node name="rockform_corner_hard_dark" parent="." index="111" unique_id=1867044337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 55.075634)
+
+[node name="rockform_corner_soft_dark" parent="." index="112" unique_id=248086412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.452267, 0, 0)
+
+[node name="rockform_wall_long_dark" parent="." index="114" unique_id=884840395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33.50668)

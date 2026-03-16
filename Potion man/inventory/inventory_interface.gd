@@ -11,6 +11,7 @@ var external_inventory_owner
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 @onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var brew_button: Button = $BrewButton
+@onready var brew_message_label: Label = $BrewMessageLabel
 
 func _physics_process(delta: float) -> void:
 	if grabbed_slot.visible:
@@ -103,16 +104,29 @@ func _on_visibility_changed() -> void:
 
 func _on_brew_button_pressed() -> void:
 	if external_inventory_owner == null:
-		print("UI: no external inventory owner")
-		return
-	
-	if not external_inventory_owner.is_in_group("brewing_station"):
-		print("UI: external inventory owner is not a brewing station")
 		return
 	
 	if not external_inventory_owner.has_method("brew"):
-		print("UI: brewing station has no brew() method")
 		return
-	
-	print("UI: brew button pressed")
-	external_inventory_owner.brew()
+
+	var result: int = external_inventory_owner.brew()
+
+	match result:
+		external_inventory_owner.BREW_SUCCESS:
+			show_brew_message("Potion brewed successfully!")
+		
+		external_inventory_owner.BREW_NO_RECIPE:
+			show_brew_message("These herbs do not create a potion.")
+		
+		external_inventory_owner.BREW_OUTPUT_FULL:
+			show_brew_message("Take the potion before brewing again.")
+		
+		external_inventory_owner.BREW_MISSING_INGREDIENTS:
+			show_brew_message("Two herbs are required.")
+
+func show_brew_message(text: String) -> void:
+	brew_message_label.text = text
+	brew_message_label.show()
+
+	await get_tree().create_timer(2.0).timeout
+	brew_message_label.hide()
