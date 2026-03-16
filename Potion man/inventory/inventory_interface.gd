@@ -11,7 +11,7 @@ var external_inventory_owner
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 @onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var brew_button: Button = $BrewButton
-@onready var brew_message_label: Label = $BrewMessageLabel
+@onready var message_label: Label = $BrewMessageLabel
 
 func _physics_process(delta: float) -> void:
 	if grabbed_slot.visible:
@@ -125,8 +125,8 @@ func _on_brew_button_pressed() -> void:
 			show_brew_message("Two herbs are required.")
 
 func show_brew_message(text: String) -> void:
-	brew_message_label.text = text
-	brew_message_label.show()
+	message_label.text = text
+	message_label.show()
 
 	await get_tree().create_timer(2.0).timeout
-	brew_message_label.hide()
+	message_label.hide()

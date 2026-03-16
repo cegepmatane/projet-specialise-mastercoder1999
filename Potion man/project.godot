@@ -22,6 +22,11 @@ HUD="*uid://d3fc445cnxj4m"
 PlayerManager="*uid://c704aa8migpn7"
 RecipeManager="*uid://myeyy72luaqd"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+
 [global_group]
 
 external_inventory=""
