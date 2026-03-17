@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://bntohfcls7klt"]
+[gd_scene format=4 uid="uid://bntohfcls7klt"]
 
 [ext_resource type="Script" uid="uid://c8idohfx8r00b" path="res://Models/chest.gd" id="1_oeuo0"]
+[ext_resource type="Texture2D" uid="uid://binhhmxl38jji" path="res://addons/Minas/textures/Box.png" id="2_1hlr1"]
+[ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="3_0x5ah"]
+[ext_resource type="Texture2D" uid="uid://binhhmxl38jji" path="res://addons/Minas/Textures/Box.png" id="4_mjfn7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm0si"]
 albedo_color = Color(0, 3.7045925, 0, 1)
@@ -11,6 +14,55 @@ material = SubResource("StandardMaterial3D_vm0si")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_abub7"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gx0tj"]
+resource_name = "Box"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_1hlr1")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0aqph"]
+_surfaces = [{
+"aabb": AABB(-0.013467857, -0.023399845, -0.013467857, 0.027358126, 0.042654425, 0.026438817),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAAAAQABAAAAAMABQACAAEAAwACAAUABAAGAAEAAQAGAAUAAwAHAAQABgAEAAcABQAHAAMABwAFAAYA"),
+"name": "Box",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("SahcvMm7nTwmhFQ8SahcvAixv7wmhFQ8SahcvAixv7xJqFy8SahcvMm7nTxJqFy8A5RjPMm7nTwmhFQ8A5RjPAixv7xJqFy8A5RjPAixv7wmhFQ8A5RjPMm7nTxJqFy8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_q6nfu"]
+resource_name = "Box"
+_surfaces = [{
+"aabb": AABB(-0.013467857, -0.023399845, -0.013467857, 0.027358126, 0.042654425, 0.026438817),
+"attribute_data": PackedByteArray("cJpzP2Txfz9xmnM/ng4AP7hVJD+eDgA/uFUkP2Txfz+qMiA/xOL/PqwyID88rDc+5duhPjysNz7l26E+xOL/Pqumnj4A0Gk5rKaePsbi/z5v1Gk5xuL/PkvaaTkA0Gk5/xFxPzysNz7+EXE/xOL/PkbNIT/E4v8+R80hPzysNz5KmyQ/Y/F/P0qbJD+eDgA/7ymlPp4OAD/vKaU+Y/F/P1VkpD5j8X8/VWSkPp4OAD99OCQ/ng4AP304JD9j8X8/"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_gx0tj"),
+"name": "Box",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("SahcvMm7nTwmhFQ8SahcvAixv7wmhFQ8SahcvAixv7xJqFy8SahcvMm7nTxJqFy8A5RjPMm7nTwmhFQ8SahcvMm7nTwmhFQ8SahcvMm7nTxJqFy8A5RjPMm7nTxJqFy8A5RjPAixv7wmhFQ8A5RjPMm7nTwmhFQ8A5RjPMm7nTxJqFy8A5RjPAixv7xJqFy8SahcvAixv7wmhFQ8A5RjPAixv7wmhFQ8A5RjPAixv7xJqFy8SahcvAixv7xJqFy8A5RjPAixv7xJqFy8A5RjPMm7nTxJqFy8SahcvMm7nTxJqFy8SahcvAixv7xJqFy8SahcvAixv7wmhFQ8SahcvMm7nTwmhFQ8A5RjPMm7nTwmhFQ8A5RjPAixv7wmhFQ8AAD/f/9//z8AAP9//3//PwAA/3//f/8/AAD/f/9//z//f////3//P/9/////f/8//3////9//z//f////3//P////3//f/+/////f/9//7////9//3//v////3//f/+//38AAP9//7//fwAA/3//v/9/AAD/f/+//38AAP9//7//////////P/////////8//////////z//////////P/9//3////+//3//f////7//f/9/////v/9//3////+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0aqph")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r67rw"]
+render_priority = 0
+shader = ExtResource("3_0x5ah")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_mjfn7")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
 [node name="Chest" type="StaticBody3D" unique_id=1951705440 groups=["external_inventory"]]
 collision_layer = 5
 collision_mask = 0
@@ -18,8 +70,14 @@ script = ExtResource("1_oeuo0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=326060133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_oeuo0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=972044191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("ConcavePolygonShape3D_abub7")
+
+[node name="Box" type="MeshInstance3D" parent="." unique_id=1336326509]
+transform = Transform3D(32.417, 0, 0, 0, -1.0314576e-06, 39.182, 0, -23.597, -1.7126996e-06, 0, 0.50619864, -0.056319)
+mesh = SubResource("ArrayMesh_q6nfu")
+surface_material_override/0 = SubResource("ShaderMaterial_r67rw")

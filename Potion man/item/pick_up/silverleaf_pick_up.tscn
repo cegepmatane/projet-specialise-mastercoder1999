@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="3_u0bdi"]
 [ext_resource type="Texture2D" uid="uid://bu6uvhp6yxyho" path="res://item/item_atlas.tres" id="4_il8jx"]
 [ext_resource type="PackedScene" uid="uid://c8tlly1q0iexj" path="res://Models/Plants/bush-01-staticbody.tscn" id="5_ae2nu"]
-[ext_resource type="Shader" uid="uid://oxnittnlsjos" path="res://Materials/BushShader.gdshader" id="6_lwrwc"]
 
 [sub_resource type="Resource" id="Resource_7jl6c"]
 script = ExtResource("3_u0bdi")
@@ -17,13 +16,6 @@ radius = 0.35812593
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q0ogl"]
 radius = 0.35812593
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5p7ko"]
-render_priority = 0
-shader = ExtResource("6_lwrwc")
-shader_parameter/glow_color = Color(1, 1, 1, 1)
-shader_parameter/glow_strength = 0.0
-shader_parameter/glow_width = 2.0
 
 [node name="PickUp" type="RigidBody3D" unique_id=1708170278]
 collision_layer = 0
@@ -50,7 +42,6 @@ shape = SubResource("SphereShape3D_q0ogl")
 
 [node name="Bush-01" parent="Bush-01-StaticBody" index="0" unique_id=1060444570]
 material_override = null
-material_overlay = SubResource("ShaderMaterial_5p7ko")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 

@@ -5,6 +5,9 @@ signal toggle_inventory()
 
 @export var inventory_data: InventoryData
 
+var time_since_last_played : float = 0.0
+var rng = RandomNumberGenerator.new();
+
 var speed
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
@@ -30,6 +33,10 @@ var health: int = 5
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
+@onready var feet: AudioStreamPlayer3D = $Feet
+@onready var wind: AudioStreamPlayer3D = $Wind
+
+
 
 
 
@@ -38,6 +45,11 @@ func _ready():
 	PlayerManager.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func _process(delta: float) -> void:
+	var wind = $Wind;
+	if not wind.playing:
+		wind.playing = true;
+		
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
@@ -74,6 +86,10 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
+			if time_since_last_played > (0.5 + rng.randf_range(-0.1, 0.1)):
+				var audio = $Feet
+				audio.play()
+				time_since_last_played = 0.0
 		else:
 			velocity.x = lerp(velocity.x, direction.x * speed, delta * 7.0)
 			velocity.z = lerp(velocity.z, direction.z * speed, delta * 7.0)
@@ -81,7 +97,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
 		 		
-	
+	time_since_last_played += delta;
 	# Head Bob	
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)

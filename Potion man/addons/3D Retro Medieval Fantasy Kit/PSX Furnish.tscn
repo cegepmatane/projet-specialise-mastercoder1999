@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cvf2jirln5bex"]
+
+[ext_resource type="PackedScene" uid="uid://gsgc0rl1pe2e" path="res://addons/Minas/Models/Mines.fbx" id="1_m16j7"]
+
+[node name="PsxFurnish" type="Node3D" unique_id=1710760456]
+
+[node name="Mines" parent="." unique_id=345433606 instance=ExtResource("1_m16j7")]

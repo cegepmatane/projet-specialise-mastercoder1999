@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://dfwabf2jgmark"]
+
+[ext_resource type="PackedScene" uid="uid://bwqbd3kecsnu1" path="res://addons/3D Retro Medieval Fantasy Kit/3D Retro Medieval Fantasy Kit.blend" id="1_2r7ey"]
+[ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="2_hgn2e"]
+[ext_resource type="Texture2D" uid="uid://b23s7vvbigp4x" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Wood-Mid.png" id="3_g2s3s"]
+[ext_resource type="Texture2D" uid="uid://cxvt6j8iafkh0" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Adobe.png" id="3_vutq2"]
+[ext_resource type="Texture2D" uid="uid://bkt7rypg1eeqp" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Wood-Pale.png" id="4_1xigq"]
+[ext_resource type="Shader" path="res://Shaders/psx_lit_transparent.gdshader" id="4_g2s3s"]
+[ext_resource type="Texture2D" uid="uid://cclajhghkb3a2" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Lime-Render.png" id="5_7f11q"]
+[ext_resource type="Texture2D" uid="uid://bkawqnofq5woh" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Glass.png" id="6_r5231"]
+[ext_resource type="Shader" path="res://Shaders/psx_lit_metal.gdshader" id="7_v084j"]
+[ext_resource type="Shader" path="res://Shaders/psx_light-volume.gdshader" id="9_jkumr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7f11q"]
+render_priority = 0
+shader = ExtResource("2_hgn2e")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_g2s3s")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r153m"]
+render_priority = 0
+shader = ExtResource("2_hgn2e")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("4_1xigq")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wu7a"]
+render_priority = 0
+shader = ExtResource("4_g2s3s")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("6_r5231")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6mh45"]
+render_priority = 0
+shader = ExtResource("4_g2s3s")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("6_r5231")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33ii4"]
+render_priority = 0
+shader = ExtResource("7_v084j")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("5_7f11q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dal44"]
+render_priority = 0
+shader = ExtResource("2_hgn2e")
+shader_parameter/modulate_color = Color(0.89492244, 0.89492244, 0.8949224, 1)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1vqu"]
+render_priority = 0
+shader = ExtResource("9_jkumr")
+shader_parameter/modulate_color = Color(0.9999992, 0.8791368, 0.1790351, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mckmy"]
+render_priority = 0
+shader = ExtResource("2_hgn2e")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("3_vutq2")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1xigq"]
+render_priority = 0
+shader = ExtResource("4_g2s3s")
+shader_parameter/modulate_color = Color(0.69789743, 0.24269372, 1, 1)
+shader_parameter/albedoTex = ExtResource("5_7f11q")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[node name="3D Retro Medieval Fantasy Kit" unique_id=1518497768 instance=ExtResource("1_2r7ey")]
+
+[node name="Table Small" parent="." index="21" unique_id=1742794576]
+surface_material_override/0 = SubResource("ShaderMaterial_7f11q")
+
+[node name="Bottle" parent="." index="56" unique_id=1779183408]
+surface_material_override/0 = SubResource("ShaderMaterial_r153m")
+surface_material_override/1 = SubResource("ShaderMaterial_1wu7a")
+surface_material_override/2 = SubResource("ShaderMaterial_6mh45")
+
+[node name="Candle" parent="." index="57" unique_id=692403347]
+surface_material_override/0 = SubResource("ShaderMaterial_33ii4")
+surface_material_override/1 = SubResource("ShaderMaterial_dal44")
+surface_material_override/2 = SubResource("ShaderMaterial_a1vqu")
+
+[node name="Cooking Pot" parent="." index="62" unique_id=981485310]
+surface_material_override/0 = SubResource("ShaderMaterial_mckmy")
+surface_material_override/1 = SubResource("ShaderMaterial_1xigq")

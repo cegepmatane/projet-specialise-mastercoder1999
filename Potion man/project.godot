@@ -91,3 +91,10 @@ inventory={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[shader_globals]
+
+precision_multiplier={
+"type": "float",
+"value": 1.0
+}

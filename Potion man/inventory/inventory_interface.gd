@@ -12,6 +12,14 @@ var external_inventory_owner
 @onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var brew_button: Button = $BrewButton
 @onready var message_label: Label = $BrewMessageLabel
+# Aduio
+@onready var chest_open: AudioStreamPlayer = $ChestOpen
+@onready var chest_close: AudioStreamPlayer = $ChestClose
+@onready var brewer_close: AudioStreamPlayer = $BrewerClose
+@onready var brewer_open: AudioStreamPlayer = $BrewerOpen
+
+
+
 
 func _physics_process(delta: float) -> void:
 	if grabbed_slot.visible:
@@ -31,20 +39,26 @@ func set_external_inventory(_external_inventory_owner) -> void:
 	inventory_data.inventory_interact.connect(on_inventory_interact)
 	external_inventory.set_inventory_data(inventory_data)
 	external_inventory.show()
+	
 	if external_inventory_owner.is_in_group("brewing_station"):
 		brew_button.show()
 	else:
 		brew_button.hide()
-
+	
+	play_open_sound()
+	
 func clear_external_inventory() -> void:
 	if external_inventory_owner:
+		var was_brewing_station: bool = external_inventory_owner.is_in_group("brewing_station")
+		
 		var inventory_data = external_inventory_owner.inventory_data
 		inventory_data.inventory_interact.disconnect(on_inventory_interact)
 		external_inventory.clear_inventory_data(inventory_data)
 		external_inventory.hide()
 		brew_button.hide()
 		external_inventory_owner = null
-
+		
+		play_close_sound(was_brewing_station)
 
 func on_inventory_interact(inventory_data: InventoryData, index: int, button: int) -> void:
 	var is_brewing_output_slot := false
@@ -130,3 +144,27 @@ func show_brew_message(text: String) -> void:
 
 	await get_tree().create_timer(2.0).timeout
 	message_label.hide()
+	
+func play_open_sound() -> void:
+	if external_inventory_owner == null:
+		return
+	
+	if external_inventory_owner.is_in_group("brewing_station"):
+		if brewer_open:
+			brewer_open.play()
+	else:
+		if chest_open:
+			chest_open.play()
+
+
+func play_close_sound(was_brewing_station: bool) -> void:
+	if was_brewing_station:
+		if brewer_open:
+			brewer_open.stop()
+		if brewer_close:
+			brewer_close.play()
+	else:
+		if chest_open:
+			chest_open.stop()
+		if chest_close:
+			chest_close.play()
