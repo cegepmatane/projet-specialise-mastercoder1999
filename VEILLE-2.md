@@ -78,3 +78,10 @@ Arguments :
     Autonomie technique : La possibilité d'utiliser SQLite garantit que votre système de recettes et de potions sera robuste et évolutif sans impacter les performances.
 
 En résumé, la légèreté de Godot et sa flexibilité pour les jeux 3D à esthétique rétro en font l'outil idéal pour concrétiser votre vision de jeu de création de potions nocturne.
+
+## Images
+
+<img width="486" height="387" alt="notes" src="https://github.com/user-attachments/assets/43481c69-2fd6-4e5f-847b-3b94ee426dea" />
+
+<img width="473" height="646" alt="sources" src="https://github.com/user-attachments/assets/797a9278-cd9e-4da9-ab19-d1a4c621254f" />
+
