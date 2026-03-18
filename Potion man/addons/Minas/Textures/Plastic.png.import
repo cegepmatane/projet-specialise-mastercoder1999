@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccfw2j86myu3t"
-path.s3tc="res://.godot/imported/Plastic.png-4c2c5992ef0dcddd4e38a445b13f63f0.s3tc.ctex"
+path.s3tc="res://.godot/imported/Plastic.png-6f90ac86ff3059d6f73719a64edb46f4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Plastic.png"
-dest_files=["res://.godot/imported/Plastic.png-4c2c5992ef0dcddd4e38a445b13f63f0.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Plastic.png"
+dest_files=["res://.godot/imported/Plastic.png-6f90ac86ff3059d6f73719a64edb46f4.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6tk2y50eg8d2"
-path.s3tc="res://.godot/imported/Wagon.png-0fa5fbadc75b77c1bcc2a554c3e879d6.s3tc.ctex"
+path.s3tc="res://.godot/imported/Wagon.png-faa279ae898d26f6d4a444c915fe273a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Wagon.png"
-dest_files=["res://.godot/imported/Wagon.png-0fa5fbadc75b77c1bcc2a554c3e879d6.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Wagon.png"
+dest_files=["res://.godot/imported/Wagon.png-faa279ae898d26f6d4a444c915fe273a.s3tc.ctex"]
 
 [params]
 

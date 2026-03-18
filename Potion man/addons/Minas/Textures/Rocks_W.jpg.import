@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lv1wwgdce2hi"
-path.s3tc="res://.godot/imported/Rocks_W.jpg-75b32bbc5aaa32841e1e6b0773880446.s3tc.ctex"
+path.s3tc="res://.godot/imported/Rocks_W.jpg-09e78afbac28698366e4a2da84a10b03.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Rocks_W.jpg"
-dest_files=["res://.godot/imported/Rocks_W.jpg-75b32bbc5aaa32841e1e6b0773880446.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Rocks_W.jpg"
+dest_files=["res://.godot/imported/Rocks_W.jpg-09e78afbac28698366e4a2da84a10b03.s3tc.ctex"]
 
 [params]
 

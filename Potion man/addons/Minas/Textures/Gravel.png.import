@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkshv6p7qfiyd"
-path.s3tc="res://.godot/imported/Gravel.png-799b7a4434eb4fc3eeeec1fc587f68fe.s3tc.ctex"
+path.s3tc="res://.godot/imported/Gravel.png-42bc520490ab8d84a359bdc0d89c600c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Gravel.png"
-dest_files=["res://.godot/imported/Gravel.png-799b7a4434eb4fc3eeeec1fc587f68fe.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Gravel.png"
+dest_files=["res://.godot/imported/Gravel.png-42bc520490ab8d84a359bdc0d89c600c.s3tc.ctex"]
 
 [params]
 

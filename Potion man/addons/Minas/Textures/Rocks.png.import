@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kuweitp1d3qo"
-path.s3tc="res://.godot/imported/Rocks.png-a1a05f947c58969680994a8691eff3a2.s3tc.ctex"
+path.s3tc="res://.godot/imported/Rocks.png-46b9c15a202165ac9bc1fafd3c81c0bf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Rocks.png"
-dest_files=["res://.godot/imported/Rocks.png-a1a05f947c58969680994a8691eff3a2.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Rocks.png"
+dest_files=["res://.godot/imported/Rocks.png-46b9c15a202165ac9bc1fafd3c81c0bf.s3tc.ctex"]
 
 [params]
 

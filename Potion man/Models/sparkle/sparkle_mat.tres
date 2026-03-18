@@ -1,7 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://0828pxpypo6k"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://0828pxpypo6k"]
 
-[ext_resource type="Shader" path="res://shaders/psx_unlit_alpha-scissor.gdshader" id="1_0hjis"]
-[ext_resource type="Texture2D" uid="uid://ced14kbpfucnc" path="res://world/sparkle/sparkle.png" id="2_oqpum"]
+[ext_resource type="Shader" uid="uid://bqwcgqceg0148" path="res://Shaders/psx_unlit_alpha-scissor.gdshader" id="1_0hjis"]
+[ext_resource type="Texture2D" uid="uid://ced14kbpfucnc" path="res://Models/sparkle/sparkle.png" id="2_oqpum"]
 
 [resource]
 render_priority = 0

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://q73jb4uqy8og"
-path.s3tc="res://.godot/imported/Barrel_03.png-d5e2c87d4f2293a4a5521e20c6f32a00.s3tc.ctex"
+path.s3tc="res://.godot/imported/Barrel_03.png-dc0afb879f1386cb79442914b357e1b4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Barrel_03.png"
-dest_files=["res://.godot/imported/Barrel_03.png-d5e2c87d4f2293a4a5521e20c6f32a00.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Barrel_03.png"
+dest_files=["res://.godot/imported/Barrel_03.png-dc0afb879f1386cb79442914b357e1b4.s3tc.ctex"]
 
 [params]
 

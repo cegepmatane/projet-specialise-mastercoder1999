@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wxmuq1736jqx"
-path.s3tc="res://.godot/imported/Lamp_Emissor.png-678772ef417c49ae98f3ea6dd0e883af.s3tc.ctex"
+path.s3tc="res://.godot/imported/Lamp_Emissor.png-1fb62588cef5910b0e0e8eca10618552.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/Minas/textures/Lamp_Emissor.png"
-dest_files=["res://.godot/imported/Lamp_Emissor.png-678772ef417c49ae98f3ea6dd0e883af.s3tc.ctex"]
+source_file="res://addons/Minas/Textures/Lamp_Emissor.png"
+dest_files=["res://.godot/imported/Lamp_Emissor.png-1fb62588cef5910b0e0e8eca10618552.s3tc.ctex"]
 
 [params]
 
