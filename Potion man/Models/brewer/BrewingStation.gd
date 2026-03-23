@@ -50,11 +50,6 @@ func brew() -> int:
 
 	return BREW_SUCCESS
 	
-func clear_ingredients() -> void:
-	print("BREW: clearing ingredients")
-	inventory_data.slot_datas[0] = null
-	inventory_data.slot_datas[1] = null
-	inventory_data.inventory_updated.emit(inventory_data)
 	
 func get_potion_item_by_id(potion_id: int) -> ItemData:
 	for item in potion_results:

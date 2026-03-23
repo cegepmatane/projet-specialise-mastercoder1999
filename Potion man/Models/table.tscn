@@ -2,11 +2,11 @@
 
 [ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="1_cqalc"]
 [ext_resource type="Texture2D" uid="uid://b23s7vvbigp4x" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Wood-Mid.png" id="2_4jtri"]
-[ext_resource type="Shader" path="res://Shaders/psx_lit_metal.gdshader" id="3_wixyu"]
+[ext_resource type="Shader" uid="uid://cmwdg8jn6u7wi" path="res://Shaders/psx_lit_metal.gdshader" id="3_wixyu"]
 [ext_resource type="Texture2D" uid="uid://cclajhghkb3a2" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Lime-Render.png" id="4_fbgbk"]
-[ext_resource type="Shader" path="res://Shaders/psx_light-volume.gdshader" id="5_kae8l"]
+[ext_resource type="Shader" uid="uid://d4nfdrjosp04j" path="res://Shaders/psx_light-volume.gdshader" id="5_kae8l"]
 [ext_resource type="Texture2D" uid="uid://bkt7rypg1eeqp" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Wood-Pale.png" id="6_fbgbk"]
-[ext_resource type="Shader" path="res://Shaders/psx_lit_transparent.gdshader" id="7_kae8l"]
+[ext_resource type="Shader" uid="uid://ps28vpx83p3c" path="res://Shaders/psx_lit_transparent.gdshader" id="7_kae8l"]
 [ext_resource type="Texture2D" uid="uid://bkawqnofq5woh" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Glass.png" id="8_4p7hl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kqd0"]
