@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://dbyegs60a33dq"]
 
-[ext_resource type="Texture2D" uid="uid://yoxsx1uyt4bk" path="res://addons/FloorMaterials/Dirt/Dirt_01/Dirt_01_basecolor.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://b6a6rak2xg71x" path="res://game.gd" id="1_eow3j"]
 [ext_resource type="PackedScene" uid="uid://c7vrsqejhsflh" path="res://player/player.tscn" id="2_7jktm"]
 [ext_resource type="Script" uid="uid://cailhfr60ernd" path="res://ui.gd" id="5_bnpwn"]
@@ -16,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://7gjv20olp371" path="res://audio/potion_close.wav" id="11_xfvwf"]
 [ext_resource type="Script" uid="uid://bcte64kam2wy2" path="res://inventory/inventory_data.gd" id="12_215e1"]
 [ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="13_7sc4i"]
+[ext_resource type="Shader" uid="uid://2l84ot5xs4go" path="res://Shaders/grain_maksim.gdshader" id="15_xfvwf"]
 [ext_resource type="Resource" uid="uid://megkkrcvom4a" path="res://item/items/peacebloom.tres" id="16_80cx4"]
 [ext_resource type="PackedScene" uid="uid://bntohfcls7klt" path="res://Models/chest.tscn" id="16_e8heu"]
 [ext_resource type="Script" uid="uid://3thy6f3h5468" path="res://item/item_data.gd" id="17_boyg6"]
@@ -31,31 +31,30 @@
 [ext_resource type="PackedScene" uid="uid://cogrxlk1bahps" path="res://item/pick_up/briarthorn_pick_up.tscn" id="26_5b14r"]
 [ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="30_36jdj"]
 [ext_resource type="Texture2D" uid="uid://dunco1mmggy64" path="res://images/floor.png" id="31_xfvwf"]
+[ext_resource type="PackedScene" uid="uid://dili5qco2e0t8" path="res://Models/enemy/enemy.tscn" id="32_dhpj7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5b14r"]
 
-[sub_resource type="Sky" id="Sky_e2o6t"]
+[sub_resource type="Sky" id="Sky_7knny"]
 sky_material = SubResource("ProceduralSkyMaterial_5b14r")
 
 [sub_resource type="Environment" id="Environment_feb5d"]
 background_mode = 1
 background_color = Color(0.67058825, 0.7607843, 1, 0.9607843)
-sky = SubResource("Sky_e2o6t")
+sky = SubResource("Sky_7knny")
 ambient_light_color = Color(1, 0.6745098, 0.9882353, 1)
 reflected_light_source = 1
 fog_enabled = true
 fog_light_color = Color(0.67058825, 0.7607843, 1, 1)
 fog_density = 0.05
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feb5d"]
-albedo_texture = ExtResource("1_e2o6t")
-uv1_scale = Vector3(-0.03, -0.03, -0.03)
-uv1_triplanar = true
+[sub_resource type="NavigationMesh" id="NavigationMesh_36jdj"]
+geometry_parsed_geometry_type = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f1jbl"]
 size = Vector3(100, 0, 100)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvwf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_082n1"]
 render_priority = 0
 shader = ExtResource("30_36jdj")
 shader_parameter/modulate_color = Color(0, 1, 0, 1)
@@ -65,12 +64,16 @@ shader_parameter/uv_offset = Vector2(0, 0)
 shader_parameter/uv_pan_velocity = Vector2(0, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vaj68"]
-material = SubResource("ShaderMaterial_xfvwf")
+material = SubResource("ShaderMaterial_082n1")
 flip_faces = true
 size = Vector3(100, 0, 100)
 subdivide_width = 100
 subdivide_height = 100
 subdivide_depth = 100
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvwf"]
+shader = ExtResource("15_xfvwf")
+shader_parameter/viewport_size = Vector2(576, 324)
 
 [sub_resource type="Resource" id="Resource_e8heu"]
 script = ExtResource("12_215e1")
@@ -171,12 +174,8 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1392639367]
 environment = SubResource("Environment_feb5d")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=219962846]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.1162109)
-visible = false
-use_collision = true
-size = Vector3(100, 0.002, 100)
-material = SubResource("StandardMaterial3D_feb5d")
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=809191820]
+navigation_mesh = SubResource("NavigationMesh_36jdj")
 
 [node name="Floor" type="Node3D" parent="." unique_id=1731096687]
 
@@ -194,6 +193,15 @@ inventory_data = ExtResource("5_vef74")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=134637995]
 script = ExtResource("5_bnpwn")
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=1167786189]
+material = SubResource("ShaderMaterial_xfvwf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="InventoryInterface" type="Control" parent="UI" unique_id=984666387]
 visible = false
@@ -387,6 +395,8 @@ light_color = Color(0.9098039, 0.8039216, 0.6666667, 1)
 light_energy = 3.449
 omni_range = 3.0
 omni_attenuation = 0.092
+
+[node name="CharacterBody3D" parent="." unique_id=604365661 instance=ExtResource("32_dhpj7")]
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

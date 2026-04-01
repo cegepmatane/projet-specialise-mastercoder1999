@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://0376rrlmw02y"]
+
+[ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="1_5ekhc"]
+[ext_resource type="Texture2D" uid="uid://dunco1mmggy64" path="res://images/floor.png" id="2_ggnvs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_haati"]
+
+[sub_resource type="Sky" id="Sky_e2o6t"]
+sky_material = SubResource("ProceduralSkyMaterial_haati")
+
+[sub_resource type="Environment" id="Environment_303p0"]
+background_mode = 1
+background_color = Color(0.67058825, 0.7607843, 1, 0.9607843)
+sky = SubResource("Sky_e2o6t")
+ambient_light_color = Color(1, 0.6745098, 0.9882353, 1)
+reflected_light_source = 1
+fog_light_color = Color(0.67058825, 0.7607843, 1, 1)
+fog_density = 0.05
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_bq67k"]
+geometry_parsed_geometry_type = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_528a0"]
+size = Vector3(100, 0, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvwf"]
+render_priority = 0
+shader = ExtResource("1_5ekhc")
+shader_parameter/modulate_color = Color(0, 1, 0, 1)
+shader_parameter/albedoTex = ExtResource("2_ggnvs")
+shader_parameter/uv_scale = Vector2(100, 100)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1kh0c"]
+material = SubResource("ShaderMaterial_xfvwf")
+flip_faces = true
+size = Vector3(100, 0, 100)
+subdivide_width = 100
+subdivide_height = 100
+subdivide_depth = 100
+
+[node name="test_navigation" type="Node3D" unique_id=2040641524]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1768256157]
+transform = Transform3D(-0.37049872, 0.9282779, -0.03211761, -0.38664815, -0.122696415, 0.9140287, 0.844532, 0.35106537, 0.40437505, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1125203375]
+environment = SubResource("Environment_303p0")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=430273903]
+navigation_mesh = SubResource("NavigationMesh_bq67k")
+
+[node name="Floor" type="Node3D" parent="." unique_id=915868817]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor" unique_id=456299571]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D" unique_id=1008036946]
+shape = SubResource("BoxShape3D_528a0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=754973814]
+mesh = SubResource("BoxMesh_1kh0c")

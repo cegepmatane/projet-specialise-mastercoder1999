@@ -105,7 +105,6 @@ func find_valid_spawn_position(existing_positions: Array[Vector3], min_spacing: 
 			failed_spacing += 1
 			continue
 
-		print("SPAWNER: vegetation accepted after ", attempt + 1, " tries")
 		return ground_pos
 
 	print("SPAWNER: vegetation failed | ground=", failed_ground, " blocked=", failed_blocked, " spacing=", failed_spacing)
@@ -145,8 +144,6 @@ func get_random_point_in_area() -> Vector3:
 func project_to_ground(from_pos: Vector3) -> Variant:
 	var to_pos: Vector3 = from_pos + Vector3.DOWN * 500.0
 
-	print("RAY from: ", from_pos, " to: ", to_pos)
-
 	var space_state := get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(from_pos, to_pos)
 
@@ -155,9 +152,6 @@ func project_to_ground(from_pos: Vector3) -> Variant:
 	if result.is_empty():
 		print("RAY: no hit")
 		return null
-
-	print("RAY: hit collider = ", result.collider)
-	print("RAY: hit position = ", result.position)
 
 	return result.position
 

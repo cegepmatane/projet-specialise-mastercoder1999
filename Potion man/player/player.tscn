@@ -41,7 +41,7 @@ draw_center = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yw30f"]
 bg_color = Color(1, 0, 0, 1)
 
-[node name="Player" type="CharacterBody3D" unique_id=1649806724]
+[node name="Player" type="CharacterBody3D" unique_id=1649806724 groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_oul6g")
 
