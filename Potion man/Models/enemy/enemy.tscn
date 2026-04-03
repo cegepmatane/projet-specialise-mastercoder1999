@@ -576,12 +576,12 @@ _data = {
 script = ExtResource("2_hqc53")
 use_gravity = true
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=541548987]
+path_desired_distance = 0.5
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=618385290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6014566, 0)
 shape = SubResource("CapsuleShape3D_3cfcv")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=541548987]
-path_desired_distance = 0.5
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=630826150]
 
@@ -1051,3 +1051,13 @@ skeleton = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="visual" unique_id=1532496933]
 libraries/ = SubResource("AnimationLibrary_eiwra")
+
+[node name="DamageArea" type="Area3D" parent="." unique_id=2058824546]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="DamageArea" unique_id=879156773]
+transform = Transform3D(1.57, 0, 0, 0, 1.57, 0, 0, 0, 1.57, 0, 2.761, 0)
+shape = SubResource("CapsuleShape3D_3cfcv")
+
+[node name="DamageCooldownTimer" type="Timer" parent="." unique_id=721078057]

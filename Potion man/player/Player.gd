@@ -35,12 +35,7 @@ var health: int = 5
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
 @onready var feet: AudioStreamPlayer3D = $Feet
 @onready var wind: AudioStreamPlayer3D = $Wind
-
-
-
-
-
-@onready var ui = $UI
+@onready var ui: CanvasLayer = $"../UI"
 func _ready():
 	PlayerManager.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -114,15 +109,6 @@ func _headbob(time) -> Vector3:
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos
 	
-func take_damage(damage : float):
-	print("The man is taking damage")
-	ui.take_damage(damage)
-	if ui.health_bar.value <= 0:
-		die()
-func die():
-	print("The man is dead")
-	moving = false
-	ui.show_gameover()
 func interact():
 	if interact_ray.is_colliding():
 		interact_ray.get_collider().player_interact()
@@ -132,4 +118,18 @@ func get_drop_position() -> Vector3:
 	return camera.global_position + direction
 	
 func heal(heal_value: int) -> void:
+	print("The man heals for ", heal_value)
 	health += heal_value
+func take_damage(damage : int):
+	print("The man takes damage for ", damage)
+	health -= damage
+	ui.take_damage(damage)
+	if health <= 0:
+		health = 0
+		die()
+func die():
+	print("The man is dead")
+	moving = false
+	#ui.show_gameover()
+	
+	

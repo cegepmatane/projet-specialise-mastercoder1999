@@ -11,13 +11,19 @@ extends CharacterBody3D
 @export var idle_animation_name: String = ""
 @export var walk_animation_name: String = "mixamo_com"
 
+@export var contact_damage: int = 1
+@export var damage_cooldown: float = 1.0
+
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
 @onready var animation_player: AnimationPlayer = $visual/AnimationPlayer
+@onready var damage_area: Area3D = $DamageArea
+@onready var damage_cooldown_timer: Timer = $DamageCooldownTimer
 
 var is_chasing: bool = false
 var nav_ready: bool = false
 var current_animation: String = ""
+var can_damage: bool = true
 
 
 func _ready() -> void:
@@ -25,6 +31,10 @@ func _ready() -> void:
 	nav_agent.target_desired_distance = 1.0
 	call_deferred("_wait_for_nav_sync")
 	_play_animation(idle_animation_name)
+
+	damage_area.body_entered.connect(_on_damage_area_body_entered)
+	damage_cooldown_timer.wait_time = damage_cooldown
+	damage_cooldown_timer.one_shot = true
 
 
 func _wait_for_nav_sync() -> void:
@@ -83,6 +93,8 @@ func _physics_process(delta: float) -> void:
 	_apply_vertical_motion(delta)
 	_update_animation(is_moving)
 	move_and_slide()
+
+	_try_contact_damage()
 
 
 func _slow_down(delta: float) -> void:
@@ -160,3 +172,29 @@ func _stop_animation() -> void:
 		animation_player.stop()
 
 	current_animation = ""
+
+
+func _on_damage_area_body_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		print("player entered")
+		_damage_player(body)
+
+func _try_contact_damage() -> void:
+	if not can_damage:
+		return
+
+	for body in damage_area.get_overlapping_bodies():
+		if body.is_in_group("player"):
+			_damage_player(body)
+			return
+
+
+func _damage_player(body: Node) -> void:
+	if not can_damage:
+		return
+	if body.has_method("take_damage"):
+		body.take_damage(contact_damage)
+		can_damage = false
+		damage_cooldown_timer.start()
+		await damage_cooldown_timer.timeout
+		can_damage = true

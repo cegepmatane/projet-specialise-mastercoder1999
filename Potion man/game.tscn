@@ -302,6 +302,29 @@ grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
 
+[node name="HealthLabel" type="Label" parent="UI" unique_id=1274212262]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 65.0
+grow_vertical = 0
+text = "Health : 5"
+horizontal_alignment = 1
+
+[node name="DamageLabel" type="Label" parent="UI" unique_id=2125160425]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -39.0
+offset_right = 98.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "-3"
+horizontal_alignment = 1
+
 [node name="BrewingStation" parent="." unique_id=1951705440 groups=["brewing_station"] instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.64441, 0, -44.86907)
 inventory_data = SubResource("Resource_e8heu")
