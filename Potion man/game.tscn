@@ -33,6 +33,7 @@
 [ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="30_36jdj"]
 [ext_resource type="Texture2D" uid="uid://dunco1mmggy64" path="res://images/floor.png" id="31_xfvwf"]
 [ext_resource type="PackedScene" uid="uid://dili5qco2e0t8" path="res://Models/enemy/enemy.tscn" id="32_dhpj7"]
+[ext_resource type="PackedScene" uid="uid://bixojdkqwfy32" path="res://Models/end_pot/end_pot.tscn" id="34_082n1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5b14r"]
 
@@ -431,6 +432,9 @@ omni_attenuation = 0.092
 
 [node name="CharacterBody3D" parent="." unique_id=604365661 instance=ExtResource("32_dhpj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5064733, 0)
+
+[node name="EndPot" parent="." unique_id=1730226414 instance=ExtResource("34_082n1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.281258, 0.56851065, 47.36886)
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
