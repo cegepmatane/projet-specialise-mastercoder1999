@@ -36,6 +36,8 @@ var health: int = 5
 @onready var feet: AudioStreamPlayer3D = $Feet
 @onready var wind: AudioStreamPlayer3D = $Wind
 @onready var ui: CanvasLayer = $"../UI"
+
+
 func _ready():
 	PlayerManager.player = self
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
