@@ -38,6 +38,15 @@ func take_damage(damage: int) -> void:
 
 	await get_tree().create_timer(3.0).timeout
 	damage_label.hide()
+	
+func heal_player(heal_value: int) ->void:
+	health_label.text = health_code + str(player.health)
+
+	damage_label.text = "+" + str(heal_value)
+	damage_label.show()
+
+	await get_tree().create_timer(3.0).timeout
+	damage_label.hide()
 
 func show_pause_menu() -> void:
 	if !paused:

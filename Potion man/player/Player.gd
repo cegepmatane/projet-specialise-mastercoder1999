@@ -120,8 +120,14 @@ func get_drop_position() -> Vector3:
 	return camera.global_position + direction
 	
 func heal(heal_value: int) -> void:
-	print("The man heals for ", heal_value)
-	health += heal_value
+	if health < 5:
+		print("The man heals for ", heal_value)
+		health += heal_value
+		ui.heal_player(heal_value)
+	else:
+		ui.heal_player(heal_value)
+		
+	
 func take_damage(damage : int):
 	print("The man takes damage for ", damage)
 	health -= damage
