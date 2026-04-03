@@ -1,9 +1,12 @@
 extends CharacterBody3D
 
 @export var speed: float = 3.5
+@export var acceleration: float = 8.0
+@export var rotation_speed: float = 5.0
 @export var aggro_range: float = 10.0
 @export var lose_range: float = 16.0
 @export var horizontal_point_threshold: float = 0.15
+@export var use_gravity: bool = false
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
@@ -25,12 +28,17 @@ func _wait_for_nav_sync() -> void:
 	print("nav ready")
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not nav_ready:
 		return
 
 	if player == null:
-		velocity = Vector3.ZERO
+		velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
+		velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+		if use_gravity:
+			_apply_gravity(delta)
+		else:
+			velocity.y = 0.0
 		move_and_slide()
 		return
 
@@ -41,6 +49,8 @@ func _physics_process(_delta: float) -> void:
 
 	if is_chasing and distance_to_player >= lose_range:
 		is_chasing = false
+
+	var move_direction := Vector3.ZERO
 
 	if is_chasing:
 		nav_agent.target_position = player.global_position
@@ -53,25 +63,46 @@ func _physics_process(_delta: float) -> void:
 			var direction := flat_target - flat_current
 
 			if direction.length() > horizontal_point_threshold:
-				direction = direction.normalized()
-				velocity.x = direction.x * speed
-				velocity.z = direction.z * speed
-			else:
-				velocity.x = 0.0
-				velocity.z = 0.0
-		else:
-			velocity.x = 0.0
-			velocity.z = 0.0
-	else:
-		velocity.x = 0.0
-		velocity.z = 0.0
+				move_direction = direction.normalized()
 
-	velocity.y = 0.0
+				velocity.x = move_toward(velocity.x, move_direction.x * speed, acceleration * delta)
+				velocity.z = move_toward(velocity.z, move_direction.z * speed, acceleration * delta)
+
+				_face_direction(move_direction, delta)
+			else:
+				velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
+				velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+		else:
+			velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
+			velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
+		velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+
+	if use_gravity:
+		_apply_gravity(delta)
+	else:
+		velocity.y = 0.0
+
 	move_and_slide()
 
 
+func _apply_gravity(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	else:
+		velocity.y = 0.0
+
+
+func _face_direction(direction: Vector3, delta: float) -> void:
+	if direction.length() <= 0.001:
+		return
+
+	var target_angle := atan2(direction.x, direction.z)
+	rotation.y = lerp_angle(rotation.y, target_angle, rotation_speed * delta)
+
+
 func _get_next_horizontal_point() -> Vector3:
-	# This updates the internal path state.
 	var next_point := nav_agent.get_next_path_position()
 
 	var path := nav_agent.get_current_navigation_path()
@@ -80,7 +111,6 @@ func _get_next_horizontal_point() -> Vector3:
 
 	var flat_current := Vector3(global_position.x, 0.0, global_position.z)
 
-	# Skip points that are only vertically different from current position.
 	for point in path:
 		var flat_point := Vector3(point.x, 0.0, point.z)
 		if flat_current.distance_to(flat_point) > horizontal_point_threshold:
