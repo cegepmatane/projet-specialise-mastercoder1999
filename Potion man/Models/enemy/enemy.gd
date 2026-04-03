@@ -8,17 +8,23 @@ extends CharacterBody3D
 @export var horizontal_point_threshold: float = 0.15
 @export var use_gravity: bool = false
 
+@export var idle_animation_name: String = ""
+@export var walk_animation_name: String = "mixamo_com"
+
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
+@onready var animation_player: AnimationPlayer = $visual/AnimationPlayer
 
 var is_chasing: bool = false
 var nav_ready: bool = false
+var current_animation: String = ""
 
 
 func _ready() -> void:
 	nav_agent.path_desired_distance = 0.5
 	nav_agent.target_desired_distance = 1.0
 	call_deferred("_wait_for_nav_sync")
+	_play_animation(idle_animation_name)
 
 
 func _wait_for_nav_sync() -> void:
@@ -33,12 +39,9 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if player == null:
-		velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
-		velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
-		if use_gravity:
-			_apply_gravity(delta)
-		else:
-			velocity.y = 0.0
+		_slow_down(delta)
+		_apply_vertical_motion(delta)
+		_update_animation(false)
 		move_and_slide()
 		return
 
@@ -50,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	if is_chasing and distance_to_player >= lose_range:
 		is_chasing = false
 
-	var move_direction := Vector3.ZERO
+	var is_moving := false
 
 	if is_chasing:
 		nav_agent.target_position = player.global_position
@@ -63,33 +66,36 @@ func _physics_process(delta: float) -> void:
 			var direction := flat_target - flat_current
 
 			if direction.length() > horizontal_point_threshold:
-				move_direction = direction.normalized()
+				is_moving = true
+				direction = direction.normalized()
 
-				velocity.x = move_toward(velocity.x, move_direction.x * speed, acceleration * delta)
-				velocity.z = move_toward(velocity.z, move_direction.z * speed, acceleration * delta)
+				velocity.x = move_toward(velocity.x, direction.x * speed, acceleration * delta)
+				velocity.z = move_toward(velocity.z, direction.z * speed, acceleration * delta)
 
-				_face_direction(move_direction, delta)
+				_face_direction(direction, delta)
 			else:
-				velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
-				velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+				_slow_down(delta)
 		else:
-			velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
-			velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+			_slow_down(delta)
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
-		velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+		_slow_down(delta)
 
-	if use_gravity:
-		_apply_gravity(delta)
-	else:
-		velocity.y = 0.0
-
+	_apply_vertical_motion(delta)
+	_update_animation(is_moving)
 	move_and_slide()
 
 
-func _apply_gravity(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+func _slow_down(delta: float) -> void:
+	velocity.x = move_toward(velocity.x, 0.0, acceleration * delta)
+	velocity.z = move_toward(velocity.z, 0.0, acceleration * delta)
+
+
+func _apply_vertical_motion(delta: float) -> void:
+	if use_gravity:
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		else:
+			velocity.y = 0.0
 	else:
 		velocity.y = 0.0
 
@@ -104,8 +110,8 @@ func _face_direction(direction: Vector3, delta: float) -> void:
 
 func _get_next_horizontal_point() -> Vector3:
 	var next_point := nav_agent.get_next_path_position()
-
 	var path := nav_agent.get_current_navigation_path()
+
 	if path.is_empty():
 		return next_point
 
@@ -117,3 +123,40 @@ func _get_next_horizontal_point() -> Vector3:
 			return point
 
 	return next_point
+
+
+func _update_animation(is_moving: bool) -> void:
+	if is_moving:
+		_play_animation(walk_animation_name)
+	else:
+		if idle_animation_name.is_empty():
+			_stop_animation()
+		else:
+			_play_animation(idle_animation_name)
+
+
+func _play_animation(animation_name: String) -> void:
+	if animation_name.is_empty():
+		return
+
+	if animation_player == null:
+		return
+
+	if not animation_player.has_animation(animation_name):
+		return
+
+	if current_animation == animation_name and animation_player.is_playing():
+		return
+
+	current_animation = animation_name
+	animation_player.play(animation_name)
+
+
+func _stop_animation() -> void:
+	if animation_player == null:
+		return
+
+	if animation_player.is_playing():
+		animation_player.stop()
+
+	current_animation = ""
