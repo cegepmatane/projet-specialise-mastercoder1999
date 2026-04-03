@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://di8maoo0rt4td" path="res://addons/Characters_psx/Textures/Character_Monster.png" id="1_3cfcv"]
 [ext_resource type="Script" uid="uid://bcjo31y1vrgsy" path="res://Models/enemy/enemy.gd" id="2_hqc53"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3cfcv"]
+height = 3.2321777
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lja5y"]
 resource_name = "Character_Monster"
 vertex_color_use_as_albedo = true
@@ -569,13 +572,20 @@ _data = {
 &"mixamo_com": SubResource("Animation_crjb5")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3cfcv"]
-
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=604365661]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("2_hqc53")
 
-[node name="Skeleton3D" type="Skeleton3D" parent="." unique_id=623506563]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=618385290]
+shape = SubResource("CapsuleShape3D_3cfcv")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=541548987]
+path_desired_distance = 0.5
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=630826150]
+
+[node name="visaul" type="Node3D" parent="." unique_id=641056353]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="visaul" unique_id=623506563]
 bones/0/name = "mixamorig_Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.165462, -1.119469, -0.32914752)
@@ -1032,19 +1042,11 @@ bones/64/position = Vector3(-2.42445e-10, 0.17714179, 1.9398953e-11)
 bones/64/rotation = Quaternion(-1.1352892e-10, 1.1117817e-16, 1.2621938e-26, 1)
 bones/64/scale = Vector3(1, 1, 1)
 
-[node name="Character_Monster" type="MeshInstance3D" parent="Skeleton3D" unique_id=1946248057]
+[node name="Character_Monster" type="MeshInstance3D" parent="visaul" unique_id=1946248057]
 mesh = SubResource("ArrayMesh_hqc53")
 skin = SubResource("Skin_w7uvl")
-skeleton = NodePath("..")
+skeleton = NodePath("../Skeleton3D")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1118424762]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="visaul" unique_id=1118424762]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_eiwra")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=618385290]
-transform = Transform3D(1.295, 0, 0, 0, 1.295, 0, 0, 0, 1.295, 0, 1.3100481, 0.05762595)
-shape = SubResource("CapsuleShape3D_3cfcv")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=541548987]
-path_desired_distance = 0.5
-
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=630826150]

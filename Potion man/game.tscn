@@ -35,20 +35,21 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5b14r"]
 
-[sub_resource type="Sky" id="Sky_7knny"]
+[sub_resource type="Sky" id="Sky_dhpj7"]
 sky_material = SubResource("ProceduralSkyMaterial_5b14r")
 
 [sub_resource type="Environment" id="Environment_feb5d"]
 background_mode = 1
 background_color = Color(0.67058825, 0.7607843, 1, 0.9607843)
-sky = SubResource("Sky_7knny")
+sky = SubResource("Sky_dhpj7")
 ambient_light_color = Color(1, 0.6745098, 0.9882353, 1)
 reflected_light_source = 1
-fog_enabled = true
 fog_light_color = Color(0.67058825, 0.7607843, 1, 1)
 fog_density = 0.05
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_36jdj"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_dhpj7"]
+vertices = PackedVector3Array(-49.5, 0.38, -49.5, -49.5, 0.38, 49.5, 49.5, 0.38, 49.5, 49.5, 0.38, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 geometry_parsed_geometry_type = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f1jbl"]
@@ -169,13 +170,17 @@ script = ExtResource("1_eow3j")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=50201380]
 transform = Transform3D(-0.37049872, 0.9282779, -0.03211761, -0.38664815, -0.122696415, 0.9140287, 0.844532, 0.35106537, 0.40437505, 0, 0, 0)
-visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1392639367]
 environment = SubResource("Environment_feb5d")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=809191820]
-navigation_mesh = SubResource("NavigationMesh_36jdj")
+navigation_mesh = SubResource("NavigationMesh_dhpj7")
+
+[node name="fakefloor" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1707525945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0)
+use_collision = true
+size = Vector3(100, 0.1, 100)
 
 [node name="Floor" type="Node3D" parent="." unique_id=1731096687]
 
@@ -387,7 +392,7 @@ vegetation_min_spacing = 1.0
 herb_scenes = Array[PackedScene]([ExtResource("24_i2p71"), ExtResource("25_xa8c5"), ExtResource("26_5b14r")])
 herb_count = 20
 vegetation_y_offset = -0.7
-blocked_nodes = [NodePath("../BrewingStation"), NodePath("../Chest")]
+blocked_nodes = [NodePath("../BrewingStation"), NodePath("../Chest"), NodePath("../CharacterBody3D")]
 
 [node name="TableLight" type="OmniLight3D" parent="." unique_id=1838492055]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.18976, 1.0644984, -46.690178)
@@ -397,6 +402,7 @@ omni_range = 3.0
 omni_attenuation = 0.092
 
 [node name="CharacterBody3D" parent="." unique_id=604365661 instance=ExtResource("32_dhpj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5064733, 0)
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
