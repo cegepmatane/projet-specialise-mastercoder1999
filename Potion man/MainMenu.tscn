@@ -11,34 +11,55 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5b7ti")
 
-[node name="GridContainer" type="GridContainer" parent="." unique_id=405659040]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1413415793]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.56294864, 0.2784093, 0.56757206, 0.38000003)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1154426329]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -66.0
+offset_right = 96.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=558524980]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Game" type="Button" parent="MarginContainer/VBoxContainer" unique_id=365041910]
+layout_mode = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1464336647]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label" type="Label" parent="." unique_id=238290965]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -145.0
+offset_top = 200.0
 offset_right = 145.0
-offset_bottom = 72.0
+offset_bottom = 272.0
 grow_horizontal = 2
-
-[node name="Label" type="Label" parent="GridContainer" unique_id=238290965]
-layout_mode = 2
 theme_override_font_sizes/font_size = 52
 text = "Potion man"
 horizontal_alignment = 1
 
-[node name="PotionButton" type="Button" parent="GridContainer" unique_id=1828596648]
-layout_mode = 2
-text = "Potion Manager"
-
-[node name="PlantButton" type="Button" parent="GridContainer" unique_id=546953498]
-layout_mode = 2
-text = "Plant Manager"
-
-[node name="GameButton" type="Button" parent="GridContainer" unique_id=1695523831]
-layout_mode = 2
-text = "Game"
-
-[connection signal="button_down" from="GridContainer/PotionButton" to="." method="_on_potion_button_button_down"]
-[connection signal="button_down" from="GridContainer/PlantButton" to="." method="_on_plant_button_button_down"]
-[connection signal="button_down" from="GridContainer/GameButton" to="." method="_on_game_button_button_down"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Game" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Game" to="." method="_on_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bkraa3sv81l4u"]
 
+[ext_resource type="Script" uid="uid://b7n05sg28bf0m" path="res://Models/end_pot/ending.gd" id="1_cfbp7"]
+
 [node name="Ending" type="Control" unique_id=833113757]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_cfbp7")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1410991191]
 layout_mode = 1
@@ -15,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.42358288, 0.42358288, 0.42358288, 0.379)
+color = Color(0.56294864, 0.2784093, 0.56757206, 0.38000003)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1232422477]
 layout_mode = 1
@@ -24,16 +27,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -33.0
-offset_right = 35.0
-offset_bottom = 33.0
+offset_left = -96.0
+offset_top = -66.0
+offset_right = 96.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=292239131]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="MainMenu" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1695001055]
 layout_mode = 2
@@ -42,3 +45,21 @@ text = "Main Menu"
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=811776068]
 layout_mode = 2
 text = "Quit"
+
+[node name="Label" type="Label" parent="." unique_id=1002922766]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 200.0
+offset_right = 20.0
+offset_bottom = 223.00003
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "You lived this time.."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
