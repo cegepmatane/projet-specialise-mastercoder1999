@@ -2,8 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://dg2rnemem7qp7" path="res://addons/Minas/Textures/Barrel.png" id="1_13ase"]
 [ext_resource type="Script" uid="uid://dkpnv2ofisgmf" path="res://Models/end_pot/end_pot.gd" id="1_pbxty"]
+[ext_resource type="Script" uid="uid://bcte64kam2wy2" path="res://inventory/inventory_data.gd" id="2_ef7dy"]
 [ext_resource type="Material" uid="uid://6l26m1a5na2u" path="res://Models/sparkle/sparkle_particle-process_mat.tres" id="2_vk0vj"]
+[ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="3_h0jx2"]
 [ext_resource type="Material" uid="uid://0828pxpypo6k" path="res://Models/sparkle/sparkle_mat.tres" id="3_pbxty"]
+[ext_resource type="Resource" uid="uid://cl1mwm6gjbe6s" path="res://item/items/health_potion.tres" id="4_tl4a8"]
+[ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="6_tl4a8"]
+[ext_resource type="Texture2D" uid="uid://bkt7rypg1eeqp" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Wood-Pale.png" id="7_arg5y"]
+
+[sub_resource type="Resource" id="Resource_i7rpt"]
+script = ExtResource("2_ef7dy")
+slot_datas = Array[ExtResource("3_h0jx2")]([null])
+metadata/_custom_type_script = "uid://bcte64kam2wy2"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5glvq"]
 resource_name = "Barrel"
@@ -47,20 +57,30 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7ouor")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ve7tf"]
+render_priority = 0
+shader = ExtResource("6_tl4a8")
+shader_parameter/modulate_color = Color(1, 1, 1, 1)
+shader_parameter/albedoTex = ExtResource("7_arg5y")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_pan_velocity = Vector2(0, 0)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b8al8"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ad1if"]
 material = ExtResource("3_pbxty")
 size = Vector2(0.15, 0.15)
 
-[node name="EndPot" type="StaticBody3D" unique_id=1730226414]
+[node name="EndPot" type="StaticBody3D" unique_id=1730226414 groups=["ending_barrel", "external_inventory"]]
 script = ExtResource("1_pbxty")
-required_amount = null
-next_scene_path = null
+inventory_data = SubResource("Resource_i7rpt")
+required_potion = ExtResource("4_tl4a8")
 
 [node name="Barrel_001" type="MeshInstance3D" parent="." unique_id=2088548104]
 transform = Transform3D(39.67653, 0, 0, 0, -1.734316e-06, 39.676525, 0, -39.676525, -1.734316e-06, 0, 0, 0)
 mesh = SubResource("ArrayMesh_6yv2c")
+surface_material_override/0 = SubResource("ShaderMaterial_ve7tf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=799070464]
 transform = Transform3D(0.71, 0, 0, 0, 0.71, 0, 0, 0, 0.71, 0, 0, 0)

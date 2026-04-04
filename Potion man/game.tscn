@@ -331,7 +331,7 @@ horizontal_alignment = 1
 [node name="PauseMenu" parent="UI" unique_id=636670151 instance=ExtResource("16_7knny")]
 visible = false
 
-[node name="BrewingStation" parent="." unique_id=1951705440 groups=["brewing_station"] instance=ExtResource("11_mfdv2")]
+[node name="BrewingStation" parent="." unique_id=1951705440 instance=ExtResource("11_mfdv2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.64441, 0, -44.86907)
 inventory_data = SubResource("Resource_e8heu")
 potion_results = Array[ExtResource("17_boyg6")]([ExtResource("18_e36ub")])
@@ -434,7 +434,9 @@ omni_attenuation = 0.092
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5064733, 0)
 
 [node name="EndPot" parent="." unique_id=1730226414 instance=ExtResource("34_082n1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.281258, 0.56851065, 47.36886)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.037113, 0.56851065, 45.743294)
+collision_layer = 5
+next_scene_path = "uid://bkraa3sv81l4u"
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

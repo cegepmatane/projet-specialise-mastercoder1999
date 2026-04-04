@@ -1,12 +1,31 @@
 [gd_scene format=4 uid="uid://bmsbt8i1s4uqa"]
 
 [ext_resource type="Script" uid="uid://blnnvygibr322" path="res://Models/brewer/BrewingStation.gd" id="1_oeuo0"]
+[ext_resource type="Script" uid="uid://bcte64kam2wy2" path="res://inventory/inventory_data.gd" id="2_gdp5v"]
 [ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="2_uf0lh"]
+[ext_resource type="Script" uid="uid://ds8jyvidjgfhd" path="res://inventory/slot_data.gd" id="3_c3eti"]
 [ext_resource type="Texture2D" uid="uid://cxvt6j8iafkh0" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Adobe.png" id="3_ycs5a"]
 [ext_resource type="Shader" path="res://Shaders/psx_lit_transparent.gdshader" id="4_2v13a"]
 [ext_resource type="Texture2D" uid="uid://cclajhghkb3a2" path="res://addons/3D Retro Medieval Fantasy Kit/Textures/Lime-Render.png" id="5_4qudk"]
 [ext_resource type="Material" uid="uid://6l26m1a5na2u" path="res://Models/sparkle/sparkle_particle-process_mat.tres" id="6_2v13a"]
 [ext_resource type="Material" uid="uid://0828pxpypo6k" path="res://Models/sparkle/sparkle_mat.tres" id="7_4qudk"]
+
+[sub_resource type="Resource" id="Resource_s2xnf"]
+script = ExtResource("3_c3eti")
+metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
+
+[sub_resource type="Resource" id="Resource_k2oqt"]
+script = ExtResource("3_c3eti")
+metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
+
+[sub_resource type="Resource" id="Resource_to5qq"]
+script = ExtResource("3_c3eti")
+metadata/_custom_type_script = "uid://ds8jyvidjgfhd"
+
+[sub_resource type="Resource" id="Resource_k6flo"]
+script = ExtResource("2_gdp5v")
+slot_datas = Array[ExtResource("3_c3eti")]([SubResource("Resource_s2xnf"), SubResource("Resource_k2oqt"), SubResource("Resource_to5qq")])
+metadata/_custom_type_script = "uid://bcte64kam2wy2"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm0si"]
 albedo_color = Color(1.2297717, 0.29692155, 1.19154, 1)
@@ -105,10 +124,11 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 material = ExtResource("7_4qudk")
 size = Vector2(0.15, 0.15)
 
-[node name="BrewingStation" type="StaticBody3D" unique_id=1951705440 groups=["external_inventory"]]
+[node name="BrewingStation" type="StaticBody3D" unique_id=1951705440 groups=["brewing_station", "external_inventory"]]
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_oeuo0")
+inventory_data = SubResource("Resource_k6flo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=326060133]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
