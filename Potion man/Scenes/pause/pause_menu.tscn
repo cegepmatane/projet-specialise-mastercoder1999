@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://dys0nxo23ay1t"]
+
+[ext_resource type="Script" uid="uid://d17sy42m2tuwd" path="res://Scenes/pause/pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://dw8q1i14rnyi8" path="res://Scenes/settings/settings.gd" id="2_42we2"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cp1wy"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_4utom"]
+color = Color(0.6318558, 0.15786779, 0.8039794, 1)
+thickness = 6
+
+[node name="PauseMenu" type="Control" unique_id=636670151]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hdmo1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2017530464]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.88000005)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1052653662]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -66.0
+offset_right = 96.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1082307126]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" unique_id=418590262]
+layout_mode = 2
+text = "Resume"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=851826888]
+layout_mode = 2
+text = "Settings"
+
+[node name="Return" type="Button" parent="MarginContainer/VBoxContainer" unique_id=501568900]
+layout_mode = 2
+text = "Return to main menu"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1756609447]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label" type="Label" parent="." unique_id=1984969290]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_top = 200.0
+offset_right = 132.0
+offset_bottom = 255.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Game paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="Control" parent="." unique_id=1887051607]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_42we2")
+
+[node name="SettingsLabel" type="Label" parent="Settings" unique_id=1054964958]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_top = 200.0
+offset_right = 98.0
+offset_bottom = 223.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsMContainer" type="MarginContainer" parent="Settings" unique_id=2042769161]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -99.0
+offset_right = 147.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMContainer" unique_id=580738493]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=1818864951]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=463450169]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_cp1wy")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_4utom")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_4utom")
+min_value = -80.0
+max_value = 20.0
+value = -10.0
+
+[node name="MuteButton" type="CheckButton" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=499532123]
+layout_mode = 2
+text = "Mute"
+
+[node name="FullscreenButton" type="CheckButton" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=317131120]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="ReturnButton" type="Button" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=1950085791]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Settings/SettingsMContainer/VBoxContainer/Volume" to="Settings" method="_on_volume_value_changed"]
+[connection signal="toggled" from="Settings/SettingsMContainer/VBoxContainer/MuteButton" to="Settings" method="_on_mute_button_toggled"]
+[connection signal="toggled" from="Settings/SettingsMContainer/VBoxContainer/FullscreenButton" to="Settings" method="_on_fullscreen_button_toggled"]
+[connection signal="pressed" from="Settings/SettingsMContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]

@@ -6,7 +6,7 @@ signal game_finished
 @export var inventory_data: InventoryData
 @export var required_potion: ItemData
 @export var required_amount: int = 3
-@export_file("*.tscn") var next_scene_path: String = "res://Scenes/Ending.tscn"
+@export_file("*.tscn") var next_scene_path: String = "res://Scenes/ending/ending.tscn"
 
 const BREW_SUCCESS = 0
 const BREW_NO_RECIPE = 1

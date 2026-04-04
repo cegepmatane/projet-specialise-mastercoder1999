@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://cwh6fms5uftbi"]
+
+[ext_resource type="Script" uid="uid://b8yoj8yyf5tap" path="res://Scenes/MainMenu/MainMenuController.gd" id="1_5b7ti"]
+[ext_resource type="Script" uid="uid://dw8q1i14rnyi8" path="res://Scenes/settings/settings.gd" id="2_c7oo3"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_b3iy1"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_piiv8"]
+color = Color(0.6318558, 0.15786779, 0.8039794, 1)
+thickness = 6
+
+[node name="MainMenu" type="Control" unique_id=820363343]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5b7ti")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1413415793]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1154426329]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -66.0
+offset_right = 96.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=558524980]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Game" type="Button" parent="MarginContainer/VBoxContainer" unique_id=365041910]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1169113199]
+layout_mode = 2
+text = "Settings"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1464336647]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label" type="Label" parent="." unique_id=238290965]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.0
+offset_top = 200.0
+offset_right = 145.0
+offset_bottom = 272.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 52
+text = "Potion man"
+horizontal_alignment = 1
+
+[node name="Settings" type="Control" parent="." unique_id=40921035]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_c7oo3")
+
+[node name="SettingsLabel" type="Label" parent="Settings" unique_id=1146024415]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_top = 200.0
+offset_right = 98.0
+offset_bottom = 223.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsMContainer" type="MarginContainer" parent="Settings" unique_id=174916161]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = -99.0
+offset_right = 147.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/SettingsMContainer" unique_id=476126465]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=698335928]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=400061630]
+layout_mode = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_b3iy1")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_piiv8")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_piiv8")
+min_value = -80.0
+max_value = 20.0
+value = -10.0
+
+[node name="MuteButton" type="CheckButton" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=890375749]
+layout_mode = 2
+text = "Mute"
+
+[node name="FullscreenButton" type="CheckButton" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=1483137634]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="ReturnButton" type="Button" parent="Settings/SettingsMContainer/VBoxContainer" unique_id=1165678320]
+layout_mode = 2
+text = "Return"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Game" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Game" to="." method="_on_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Settings/SettingsMContainer/VBoxContainer/Volume" to="Settings" method="_on_volume_value_changed"]
+[connection signal="toggled" from="Settings/SettingsMContainer/VBoxContainer/MuteButton" to="Settings" method="_on_mute_button_toggled"]
+[connection signal="toggled" from="Settings/SettingsMContainer/VBoxContainer/FullscreenButton" to="Settings" method="_on_fullscreen_button_toggled"]
+[connection signal="pressed" from="Settings/SettingsMContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
