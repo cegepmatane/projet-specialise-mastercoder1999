@@ -1,9 +1,11 @@
-[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ouxg2w30jlj7"]
 
-[ext_resource path="res://addons/shapespark-low-poly-exterior-plants/textures/branch-1-01.png" type="Texture" id=1]
+[ext_resource type="Texture2D" uid="uid://dp6dm4eeyxqhb" path="res://addons/shapespark-low-poly-exterior-plants/textures/branch-1-01.png" id="1"]
 
 [resource]
-params_cull_mode = 2
-params_use_alpha_scissor = true
-params_alpha_scissor_threshold = 0.5
-albedo_texture = ExtResource( 1 )
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1")
+grow_amount = 4.32
