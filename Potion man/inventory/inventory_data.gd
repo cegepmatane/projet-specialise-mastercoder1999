@@ -2,7 +2,7 @@ extends Resource
 class_name InventoryData
 
 signal inventory_updated(inventory_data: InventoryData)
-signal inventory_interact(inventory_data: InventoryData, index: int, button: int)
+signal inventory_interact(inventory_data: InventoryData, index: int, button: int, shift_pressed: bool)
 
 @export var slot_datas : Array[SlotData]
 
@@ -71,5 +71,5 @@ func pick_up_slot_data(slot_data: SlotData) -> bool:
 			return true
 	
 	return false
-func on_slot_clicked(index: int, button: int) -> void:
-	inventory_interact.emit(self, index, button)
+func on_slot_clicked(index: int, button: int, shift_pressed: bool) -> void:
+	inventory_interact.emit(self, index, button, shift_pressed)

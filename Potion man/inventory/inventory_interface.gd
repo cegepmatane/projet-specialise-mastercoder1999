@@ -61,7 +61,12 @@ func clear_external_inventory() -> void:
 
 		play_close_sound(was_brewing_station)
 
-func on_inventory_interact(inventory_data: InventoryData, index: int, button: int) -> void:
+func on_inventory_interact(inventory_data: InventoryData, index: int, button: int, shift_pressed: bool) -> void:
+	if shift_pressed and grabbed_slot_data == null:
+		if try_shift_transfer(inventory_data, index):
+			update_grabbed_slot()
+			return
+
 	var is_brewing_output_slot := false
 
 	if external_inventory_owner \
@@ -85,7 +90,81 @@ func on_inventory_interact(inventory_data: InventoryData, index: int, button: in
 			grabbed_slot_data = inventory_data.drop_single_slot_data(grabbed_slot_data, index)
 
 	update_grabbed_slot()
+func try_shift_transfer(source_inventory: InventoryData, index: int) -> bool:
+	if source_inventory == null:
+		return false
 
+	if index < 0 or index >= source_inventory.slot_datas.size():
+		return false
+
+	var slot_data: SlotData = source_inventory.slot_datas[index]
+	if slot_data == null:
+		return false
+
+	var target_inventory: InventoryData = null
+
+	if source_inventory == player_inventory.inventory_data:
+		if external_inventory_owner == null:
+			return false
+		target_inventory = external_inventory_owner.inventory_data
+	else:
+		target_inventory = player_inventory.inventory_data
+
+	if target_inventory == null:
+		return false
+
+	# Brewer special rules
+	if external_inventory_owner \
+			and external_inventory_owner.is_in_group("brewing_station") \
+			and target_inventory == external_inventory_owner.inventory_data:
+		return try_shift_transfer_to_brewer(source_inventory, index, slot_data)
+
+	# Generic chest / ending barrel / external inventory transfer
+	return try_shift_transfer_generic(source_inventory, target_inventory, index)
+
+func try_shift_transfer_generic(source_inventory: InventoryData, target_inventory: InventoryData, index: int) -> bool:
+	var grabbed: SlotData = source_inventory.grab_slot_data(index)
+	if grabbed == null:
+		return false
+
+	var success: bool = target_inventory.pick_up_slot_data(grabbed)
+
+	if not success:
+		source_inventory.slot_datas[index] = grabbed
+		source_inventory.inventory_updated.emit(source_inventory)
+		return false
+
+	return true
+
+func try_shift_transfer_to_brewer(source_inventory: InventoryData, index: int, slot_data: SlotData) -> bool:
+	# only allow herbs into brewer
+	if slot_data.item_data == null or slot_data.item_data.plant_id == -1:
+		return false
+
+	var brewer_inventory: InventoryData = external_inventory_owner.inventory_data
+
+	# only ingredient slots 0 and 1 are valid for shift-click insertion
+	for target_index in [0, 1]:
+		var target_slot: SlotData = brewer_inventory.slot_datas[target_index]
+
+		if target_slot != null and target_slot.can_fully_merge_with(slot_data):
+			var grabbed: SlotData = source_inventory.grab_slot_data(index)
+			if grabbed == null:
+				return false
+			target_slot.fully_merge_with(grabbed)
+			brewer_inventory.inventory_updated.emit(brewer_inventory)
+			return true
+
+	for target_index in [0, 1]:
+		if brewer_inventory.slot_datas[target_index] == null:
+			var grabbed: SlotData = source_inventory.grab_slot_data(index)
+			if grabbed == null:
+				return false
+			brewer_inventory.slot_datas[target_index] = grabbed
+			brewer_inventory.inventory_updated.emit(brewer_inventory)
+			return true
+
+	return false
 func update_grabbed_slot() -> void:
 	if grabbed_slot_data:
 		grabbed_slot.show()

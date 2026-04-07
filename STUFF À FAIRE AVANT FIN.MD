@@ -22,7 +22,7 @@ avant de faire la vidéo final.
 
 
 ### World gen :
-- [ ] enemy random? or multiple in map
+- [x] enemy random? or multiple in map (Multiple in map is what was implemented)
 
 - [x] herbs need to spawn more fixed (like 50% of each) to make sure the player can always complete the level
 
