@@ -1,11 +1,11 @@
 # stuff à faire
 avant de faire la vidéo final.
 ### inventaire + craft :
-- [ ] si 2 herbes de chaque : toujours 1 potion
+- [x] si 2 herbes de chaque : toujours 1 potion
 
 - [ ] si potion encore dans l'interface et click sur brew : rien n'arrive
 
-- [ ] shift click?
+- [x] shift click? manque le right click pour seulement 1
 
 ### Sons :
 #### Game sounds
