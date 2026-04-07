@@ -572,7 +572,7 @@ _data = {
 &"mixamo_com": SubResource("Animation_crjb5")
 }
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=604365661]
+[node name="Enemy" type="CharacterBody3D" unique_id=604365661]
 script = ExtResource("2_hqc53")
 use_gravity = true
 
