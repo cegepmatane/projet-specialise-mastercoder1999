@@ -59,26 +59,51 @@ func spawn_vegetation() -> void:
 		_vegetation_positions.append(spawn_pos)
 		print("SPAWNER: vegetation spawned = ", _vegetation_positions.size(), " / ", vegetation_count)
 func spawn_herbs() -> void:
-	for i in range(herb_count):
+	if herb_scenes.is_empty():
+		return
+
+	var herb_pool: Array[PackedScene] = build_balanced_scene_pool(herb_scenes, herb_count)
+	herb_pool.shuffle()
+
+	for scene in herb_pool:
 		var spawn_pos: Variant = find_valid_spawn_position_combined(herb_min_spacing)
 		if spawn_pos == null:
+			print("SPAWNER: herb failed to find valid position")
 			continue
-		
-		var scene: PackedScene = get_random_scene(herb_scenes)
+
 		if scene == null:
 			continue
-		
+
 		var instance := scene.instantiate() as Node3D
 		if instance == null:
 			continue
-		
+
 		herb_container.add_child(instance)
 		instance.global_position = spawn_pos + Vector3(0, herb_y_offset, 0)
 		instance.rotation.y = randf_range(0.0, TAU)
-		
+
 		_herb_positions.append(spawn_pos)
 		print("SPAWNER: herbs spawned = ", _herb_positions.size(), " / ", herb_count)
+func build_balanced_scene_pool(scene_array: Array[PackedScene], total_count: int) -> Array[PackedScene]:
+	var result: Array[PackedScene] = []
 
+	if scene_array.is_empty() or total_count <= 0:
+		return result
+
+	var scene_count := scene_array.size()
+	var base_amount := total_count / scene_count
+	var remainder := total_count % scene_count
+
+	for i in range(scene_count):
+		for j in range(base_amount):
+			result.append(scene_array[i])
+
+	# distribute leftovers
+	for i in range(remainder):
+		result.append(scene_array[i])
+
+	return result
+			
 func get_random_scene(scene_array: Array[PackedScene]) -> PackedScene:
 	if scene_array.is_empty():
 		return null

@@ -192,6 +192,10 @@ func _try_contact_damage() -> void:
 func _damage_player(body: Node) -> void:
 	if not can_damage:
 		return
+	if not is_inside_tree():
+		return
+	if damage_cooldown_timer == null or not damage_cooldown_timer.is_inside_tree():
+		return
 	if body.has_method("take_damage"):
 		body.take_damage(contact_damage)
 		can_damage = false

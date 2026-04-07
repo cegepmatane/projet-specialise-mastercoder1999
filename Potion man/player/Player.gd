@@ -157,5 +157,7 @@ func die():
 	print("The man is dead")
 	moving = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	set_physics_process(false)
+	set_process(false)
 	get_tree().change_scene_to_file("res://Scenes/ending/ending_bad.tscn")
 	# ui.show_gameover()
