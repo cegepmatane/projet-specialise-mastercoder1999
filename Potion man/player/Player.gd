@@ -46,6 +46,8 @@ func _process(delta: float) -> void:
 		wind.play()
 
 func _unhandled_input(event):
+	if not moving:
+		return
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
@@ -58,6 +60,9 @@ func _unhandled_input(event):
 		interact()
 
 func _physics_process(delta: float) -> void:
+	if not moving:
+		return
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -151,4 +156,6 @@ func take_damage(damage: int):
 func die():
 	print("The man is dead")
 	moving = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://Scenes/ending/ending_bad.tscn")
 	# ui.show_gameover()

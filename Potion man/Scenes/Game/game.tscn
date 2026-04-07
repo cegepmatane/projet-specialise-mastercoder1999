@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b6a6rak2xg71x" path="res://Scenes/Game/game.gd" id="1_eow3j"]
 [ext_resource type="PackedScene" uid="uid://c7vrsqejhsflh" path="res://player/player.tscn" id="2_7jktm"]
 [ext_resource type="Script" uid="uid://cailhfr60ernd" path="res://ui.gd" id="5_bnpwn"]
-[ext_resource type="Resource" uid="uid://cl3c15occ0m6t" path="res://inventory_data.tres" id="5_vef74"]
 [ext_resource type="PackedScene" uid="uid://bpca6anhwqg3u" path="res://inventory/inventory.tscn" id="6_ryrav"]
 [ext_resource type="Script" uid="uid://dt2b01jkijfh0" path="res://inventory/inventory_interface.gd" id="7_j5wjh"]
 [ext_resource type="AudioStream" uid="uid://bkkvn2da6qjsh" path="res://audio/chest_open.mp3" id="9_bnpwn"]
@@ -29,7 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://dnl47riuwul2r" path="res://Models/Trees/tree-01-3-staticbody.tscn" id="23_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://d3fou3r1lharo" path="res://item/pick_up/silverleaf_pick_up.tscn" id="24_i2p71"]
 [ext_resource type="PackedScene" uid="uid://c023r5f5y15u7" path="res://item/pick_up/peacebloom_pick_up.tscn" id="25_xa8c5"]
-[ext_resource type="PackedScene" uid="uid://cogrxlk1bahps" path="res://item/pick_up/briarthorn_pick_up.tscn" id="26_5b14r"]
 [ext_resource type="Shader" uid="uid://bin61y3nc02gu" path="res://Shaders/psx_lit.gdshader" id="30_36jdj"]
 [ext_resource type="Texture2D" uid="uid://dunco1mmggy64" path="res://images/floor.png" id="31_xfvwf"]
 [ext_resource type="PackedScene" uid="uid://dili5qco2e0t8" path="res://Models/enemy/enemy.tscn" id="32_dhpj7"]
@@ -74,6 +72,11 @@ size = Vector3(100, 0, 100)
 subdivide_width = 100
 subdivide_height = 100
 subdivide_depth = 100
+
+[sub_resource type="Resource" id="Resource_diago"]
+script = ExtResource("12_215e1")
+slot_datas = Array[ExtResource("13_7sc4i")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://bcte64kam2wy2"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xfvwf"]
 shader = ExtResource("15_xfvwf")
@@ -197,7 +200,7 @@ mesh = SubResource("BoxMesh_vaj68")
 
 [node name="Player" parent="." unique_id=1649806724 instance=ExtResource("2_7jktm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.986137, 0, -44.13568)
-inventory_data = ExtResource("5_vef74")
+inventory_data = SubResource("Resource_diago")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=134637995]
 script = ExtResource("5_bnpwn")
@@ -418,7 +421,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -52.
 vegetation_scenes = Array[PackedScene]([ExtResource("23_qhcbd")])
 vegetation_count = 200
 vegetation_min_spacing = 1.0
-herb_scenes = Array[PackedScene]([ExtResource("24_i2p71"), ExtResource("25_xa8c5"), ExtResource("26_5b14r")])
+herb_scenes = Array[PackedScene]([ExtResource("24_i2p71"), ExtResource("25_xa8c5")])
 herb_count = 20
 vegetation_y_offset = -0.7
 blocked_nodes = [NodePath("../BrewingStation"), NodePath("../Chest"), NodePath("../CharacterBody3D")]
