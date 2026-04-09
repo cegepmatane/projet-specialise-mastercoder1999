@@ -4,9 +4,49 @@ var database: SQLite
 
 func _ready() -> void:
 	database = SQLite.new()
-	database.path = "res://data.db"
-	database.open_db()
-	print("RECIPE: database opened")
+
+	var db_path := _prepare_database()
+	if db_path == "":
+		push_error("RECIPE: failed to prepare database")
+		return
+
+	database.path = db_path
+
+	var opened = database.open_db()
+	print("RECIPE: open result = ", opened)
+	print("RECIPE: database path = ", db_path)
+
+	if not opened:
+		push_error("RECIPE: database failed to open")
+
+func _prepare_database() -> String:
+	var source_path := "res://data.db"
+	var target_path := "user://data.db"
+
+	print("RECIPE: source exists = ", FileAccess.file_exists(source_path))
+	print("RECIPE: target exists = ", FileAccess.file_exists(target_path))
+	print("RECIPE: user dir = ", OS.get_user_data_dir())
+
+	if not FileAccess.file_exists(target_path):
+		var source_file := FileAccess.open(source_path, FileAccess.READ)
+		if source_file == null:
+			push_error("RECIPE: could not open source DB: " + source_path)
+			return ""
+
+		var bytes := source_file.get_buffer(source_file.get_length())
+		source_file.close()
+
+		var target_file := FileAccess.open(target_path, FileAccess.WRITE)
+		if target_file == null:
+			push_error("RECIPE: could not create target DB: " + target_path)
+			return ""
+
+		target_file.store_buffer(bytes)
+		target_file.close()
+
+		print("RECIPE: copied DB to user://")
+
+	return target_path
 
 func get_recipe_result(slot_datas: Array[SlotData]) -> int:
 	print("RECIPE: get_recipe_result called")
@@ -45,9 +85,10 @@ func get_recipe_result(slot_datas: Array[SlotData]) -> int:
 
 	print("RECIPE: running query:\n", query)
 
-	database.query(query)
-	var rows: Array = database.query_result
+	var ok = database.query(query)
+	print("RECIPE: query ok = ", ok)
 
+	var rows: Array = database.query_result
 	print("RECIPE: row count = ", rows.size())
 
 	if rows.is_empty():
