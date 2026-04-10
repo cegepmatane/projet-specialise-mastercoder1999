@@ -43,5 +43,5 @@
 
 ## (4) Page de veille publique
 
-- URL GitHub Pages : https://UTILISATEUR.github.io/REPO/
+- URL GitHub Pages : https://cegepmatane.github.io/projet-specialise-mastercoder1999/ OU https://mastercoder1999.github.io/PotionMan/
 
