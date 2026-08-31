@@ -1,6 +1,6 @@
 [
-{"nom":"godot","repo":"godotengine/godot", "stars":116062,"forks":26459, "issues":18768},
-{"nom":"bevy","repo":"bevyengine/bevy", "stars":47817,"forks":4777, "issues":3425},
-{"nom":"stride","repo":"stride3d/stride", "stars":7796,"forks":1136, "issues":681},
-{"nom":"defold","repo":"defold/defold", "stars":6267,"forks":450, "issues":965}
+{"nom":"godot","repo":"godotengine/godot", "stars":116435,"forks":26554, "issues":18827},
+{"nom":"bevy","repo":"bevyengine/bevy", "stars":47977,"forks":4794, "issues":3459},
+{"nom":"stride","repo":"stride3d/stride", "stars":7809,"forks":1141, "issues":684},
+{"nom":"defold","repo":"defold/defold", "stars":6275,"forks":451, "issues":964}
 ]
